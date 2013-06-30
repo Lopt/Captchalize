@@ -1,34 +1,44 @@
 package cap;
 
 import cap.Vector2D;
-import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.Graphics2D;
+import javax.imageio.ImageIO;
 
 public class CaptchaImage {
 	
-	public CaptchaImage(Vector2D position, Image imageData) {
+	public CaptchaImage(Vector2D position, BufferedImage image) {
 		this.position = position;
-		this.imageData = imageData;
-		this.frequenceData = null;
+		this.image = image;
 	}
+
+	public CaptchaImage(BufferedImage image) {
+		this.position = new Vector2D();
+		this.image = image;
+	}
+
+
+	public CaptchaImage(Vector2D position, Graphics2D imageData) {
+		this.position = position;
+		imageData.drawImage(this.image, null, 0, 0);
+	}
+	
+	public CaptchaImage(Graphics2D imageData) {
+		this.position = new Vector2D();
+		imageData.drawImage(this.image, null, 0, 0);
+	}
+	
 	
 	public Vector2D getPosition() {
 		return position;
 	}
 
-	public Image getFrequencyData() {
-		if (this.frequenceData == null) {
-			// TODO: Insert Fourier Transformation here
-		}
-		return this.frequenceData;
-	}
-	
-	public Image getImageData() {
-		return this.imageData;
+	public Graphics2D getImageData() {
+		return this.image.createGraphics();
 	}
 
 	
 	private Vector2D position; 
-	private Image    imageData;
-	private Image    frequenceData;
+	private BufferedImage image;
 	
 }

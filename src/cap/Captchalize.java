@@ -2,9 +2,12 @@ package cap;
 
 import cap.CaptchaSystem;
 
+import java.awt.Image;
+
 public class Captchalize {
 
 	public static void main(String[] args) {
+		// parameter: --server --image=IMAGE_PATH --url=URL --system=SYSTEM
 		
 	}
 
