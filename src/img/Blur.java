@@ -7,15 +7,13 @@ import java.awt.Graphics2D;
 public class Blur {
 
 	static CompoundImage gaussian(CaptchaImage captchaImage) {
-		Graphics2D image = captchaImage.getImageData().createGraphics();
-		image.
+		/*Graphics2D image = captchaImage.getImageData().createGraphics();
 		
 		for (int x = 0; x < image.getWidth(); ++x) {
 			for (int y = 0; y < image.getWidth(); ++y) {
 				getHeight()
 			}
-		}
-		
+		}*/
+		return null;
 	}
-
 }
