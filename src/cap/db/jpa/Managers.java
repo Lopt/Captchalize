@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
  */
 public class Managers {
     public static CaptchaAddressManager captchaAddressManager = null;
+    public static CaptchaImageManager   captchaImageManager   = null;
     public static CaptchaSampleManager  captchaSampleManager  = null;
     public static CaptchaSystemManager  captchaSystemManager  = null;
     public static SlotManager           slotManager           = null;
@@ -14,6 +15,7 @@ public class Managers {
 
     public static void createManagers(EntityManager manager) {
         captchaAddressManager = new CaptchaAddressManager(manager);
+        captchaImageManager = new CaptchaImageManager(manager);
         captchaSampleManager = new CaptchaSampleManager(manager);
         captchaSystemManager = new CaptchaSystemManager(manager);
         slotManager = new SlotManager(manager);
@@ -22,6 +24,7 @@ public class Managers {
 
     public static void destroyManagers() {
         captchaAddressManager = null;
+        captchaImageManager = null;
         captchaSampleManager = null;
         captchaSystemManager = null;
         slotManager = null;
