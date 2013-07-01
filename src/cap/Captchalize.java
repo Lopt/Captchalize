@@ -1,8 +1,6 @@
 package cap;
 
-import cap.CaptchaSystem;
-
-import java.awt.Image;
+import cap.img.CompoundImage;
 
 public class Captchalize {
 

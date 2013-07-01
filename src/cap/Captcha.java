@@ -1,5 +1,7 @@
 package cap;
 
+import cap.img.CompoundImage;
+
 import java.util.List;
 
 public class Captcha {
