@@ -1,7 +1,10 @@
 package cap.db.jpa;
 
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.Collection;
 
 /**
@@ -21,6 +24,21 @@ public class WebsiteManager extends CaptchalizeEntityManager<Website>
         this.add(site);
 
         return site;
+    }
+
+    public Website getOrCreate(String hostname) {
+        CriteriaBuilder cb = this.getCriteriaBuilder();
+        CriteriaQuery<Website> query = cb.createQuery(Website.class);
+        Root<Website> root = query.from(Website.class);
+
+        query.where(cb.equal(root.get("hostname"), hostname));
+
+        Website site = this.get(query);
+        if (site == null) {
+            return this.create(hostname);
+        } else {
+            return site;
+        }
     }
 
     @Override

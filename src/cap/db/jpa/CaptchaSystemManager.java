@@ -1,7 +1,10 @@
 package cap.db.jpa;
 
 import javax.persistence.EntityManager;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.Collection;
 
 /**
@@ -21,6 +24,21 @@ public class CaptchaSystemManager extends CaptchalizeEntityManager<CaptchaSystem
         this.add(system);
 
         return system;
+    }
+
+    public CaptchaSystem getOrCreate(String name) {
+        CriteriaBuilder cb = this.getCriteriaBuilder();
+        CriteriaQuery<CaptchaSystem> query = cb.createQuery(CaptchaSystem.class);
+        Root<CaptchaSystem> root = query.from(CaptchaSystem.class);
+
+        query.where(cb.equal(root.get("name"), name));
+
+        CaptchaSystem system = this.get(query);
+        if (system == null) {
+            return this.create(name);
+        } else {
+            return system;
+        }
     }
 
     @Override

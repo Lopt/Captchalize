@@ -27,7 +27,7 @@ public class CaptchaSystem implements ICaptchalizeEntity {
         return this.name;
     }
 
-    public void setName(final String hostname) {
+    public void setName(final String name) {
         this.name = name;
     }
 }

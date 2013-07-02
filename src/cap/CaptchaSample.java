@@ -4,9 +4,9 @@ import cap.img.CompoundImage;
 
 import java.util.List;
 
-public class Captcha {
+public class CaptchaSample {
 	
-	public Captcha(CaptchaSystem system) {
+	public CaptchaSample(ICaptchaSystem system) {
 		this.system = system;
 	}
 	
@@ -23,7 +23,7 @@ public class Captcha {
 		return null;
 	}
 	
-	private CaptchaSystem system;
+	private ICaptchaSystem system;
 	private List<IResultPart> results;
 	//functionPipeline;
 	

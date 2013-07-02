@@ -22,6 +22,10 @@ public class CaptchaSample implements ICaptchalizeEntity {
     private CaptchaSystem captchaSystem = null;
 
     @ManyToOne
+    @JoinColumn(name = "captchaAddressId")
+    private CaptchaAddress captchaAddress = null;
+
+    @ManyToOne
     @JoinColumn(name = "captchaImageId")
     private CaptchaImage captchaImage = null;
 
@@ -49,6 +53,14 @@ public class CaptchaSample implements ICaptchalizeEntity {
     @Override
     public long getId() {
         return this.id;
+    }
+
+    public CaptchaAddress getCaptchaAddress() {
+        return this.captchaAddress;
+    }
+
+    public void setCaptchaAddress(final CaptchaAddress captchaAddress) {
+        this.captchaAddress = captchaAddress;
     }
 
     public CaptchaAudio getCaptchaAudio() {

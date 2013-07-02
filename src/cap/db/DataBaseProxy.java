@@ -167,8 +167,8 @@ public class DataBaseProxy implements IDataBaseProxy {
     public Properties getHibernateConfig() {
         Properties props = new Properties();
 
-        props.setProperty("hibernate.show_sql", "false");
-        props.setProperty("hibernate.format_sql", "false");
+        props.setProperty("hibernate.show_sql", "true");
+        props.setProperty("hibernate.format_sql", "true");
 
         props.setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
         props.setProperty("hibernate.hbm2ddl.auto", "update");

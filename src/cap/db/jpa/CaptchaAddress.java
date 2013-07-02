@@ -27,7 +27,6 @@ public class CaptchaAddress implements ICaptchalizeEntity {
     private Website website = null;
 
     private String urlProtocol  = "";
-    private String urlSubDomain = "";
     private String urlPath      = "";
     private String urlParams    = "";
     private int    urlPort      = 0;
@@ -57,14 +56,6 @@ public class CaptchaAddress implements ICaptchalizeEntity {
 
     public void setUrlProtocol(final String urlProtocol) {
         this.urlProtocol = urlProtocol;
-    }
-
-    public String getUrlSubDomain() {
-        return this.urlSubDomain;
-    }
-
-    public void setUrlSubDomain(final String urlSubDomain) {
-        this.urlSubDomain = urlSubDomain;
     }
 
     public String getUrlPath() {
@@ -106,11 +97,6 @@ public class CaptchaAddress implements ICaptchalizeEntity {
         url.append(this.urlProtocol);
         url.append("://");
 
-        if (!this.urlSubDomain.equals("")) {
-            url.append(this.urlSubDomain);
-            url.append(".");
-        }
-
         url.append(this.website.getHostname());
 
         if (this.urlPort != 80) {
@@ -134,13 +120,9 @@ public class CaptchaAddress implements ICaptchalizeEntity {
         assert this.website != null : "Set the website attribute first.";
         assert this.website.getHostname().equals(url.getHost()) : "Website hostname and the url hostname mismatched.";
 
-        String host = url.getHost();
-        int IndexOfSubDomainPoint = host.lastIndexOf(".", host.lastIndexOf(".") - 1);
-
-        this.urlSubDomain = host.substring(0, IndexOfSubDomainPoint);
-        this.urlProtocol = url.getProtocol();
-        this.urlPath = url.getPath();
-        this.urlParams = url.getQuery();
-        this.urlPort = url.getPort() == -1 ? 80 : url.getPort();
+        this.urlProtocol  = url.getProtocol() == null ? "" : url.getProtocol();
+        this.urlPath      = url.getPath()     == null ? "" : url.getPath();
+        this.urlParams    = url.getQuery()    == null ? "" : url.getQuery();
+        this.urlPort      = url.getPort()     == -1   ? 80 : url.getPort();
     }
 }

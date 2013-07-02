@@ -5,8 +5,11 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -21,25 +24,43 @@ public class CaptchaAddressManager extends CaptchalizeEntityManager<CaptchaAddre
     }
 
     public CaptchaAddress create(URL url) {
-        WebsiteManager wm = Managers.websiteManager;
-        CriteriaBuilder cb = wm.getCriteriaBuilder();
-        CriteriaQuery<Website> query = cb.createQuery(Website.class);
-        Root<Website> root = query.from(Website.class);
-        query.where(cb.equal(root.get("hostname"), url.getHost()));
 
         CaptchaAddress address = new CaptchaAddress();
-        Website site = wm.get(query);
-        if (site == null) {
-            address.setWebsite(wm.create(url.getHost()));
-        } else {
-            address.setWebsite(site);
-        }
+
+        address.setWebsite(Managers.websiteManager.getOrCreate(url.getHost()));
         address.setUrl(url);
         address.setDate(new Date());
 
         this.add(address);
 
         return address;
+    }
+
+    public CaptchaAddress getOrCreate(URL url) {
+        CriteriaBuilder cb = this.getCriteriaBuilder();
+        CriteriaQuery<CaptchaAddress> query = cb.createQuery(CaptchaAddress.class);
+        Root<CaptchaAddress> root = query.from(CaptchaAddress.class);
+
+        CaptchaAddress tmp = new CaptchaAddress();
+        tmp.setWebsite(Managers.websiteManager.getOrCreate(url.getHost()));
+        tmp.setUrl(url);
+        tmp.setDate(new Date());
+
+        query.where(cb.and(
+            cb.equal(root.get("website").get("id"), tmp.getWebsite().getId()),
+            cb.equal(root.get("urlProtocol"), tmp.getUrlProtocol()),
+            cb.equal(root.get("urlPath"), tmp.getUrlPath()),
+            cb.equal(root.get("urlPort"), tmp.getUrlPort()),
+            cb.equal(root.get("urlParams"), tmp.getUrlParams())
+        ));
+
+        CaptchaAddress address = this.get(query);
+        if (address == null) {
+            this.add(tmp);
+            return tmp;
+        } else {
+            return address;
+        }
     }
 
     @Override

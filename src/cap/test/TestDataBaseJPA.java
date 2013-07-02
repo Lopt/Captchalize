@@ -13,11 +13,6 @@ import javax.persistence.PersistenceUnit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import cap.db.jpa.ExampleSlotFunction;
-import cap.db.jpa.ISlotFunction;
-import cap.db.jpa.Slot;
-import cap.db.jpa.SlotManager;
-import cap.db.jpa.SlotNotFoundException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,6 +25,9 @@ import cap.db.jpa.CaptchaAddress;
 import cap.db.jpa.CaptchaAddressManager;
 import cap.db.jpa.Website;
 import cap.db.jpa.WebsiteManager;
+import cap.db.jpa.ExampleSlotFunction;
+import cap.db.jpa.Slot;
+import cap.db.jpa.SlotManager;
 
 /**
  * Authors: Bernd Schmidt, Robert Könitz
@@ -145,5 +143,23 @@ public class TestDataBaseJPA {
         function = slot.getFunction();
         assertNotNull(function);
         assertEquals("Test", function.getTestValue());
+    }
+
+    @Test
+    public void getOrCreateCaptchaAddress() throws Exception {
+        WebsiteManager wm = Managers.websiteManager;
+        CaptchaAddressManager cam = Managers.captchaAddressManager;
+
+        URL url = new URL("http://www.captcha.net/");
+
+        long beforeSize = cam.getCount();
+
+        this.em.getTransaction().begin();
+        cam.getOrCreate(url);
+        this.em.getTransaction().commit();
+
+        long afterSize = cam.getCount();
+
+        assertEquals(beforeSize, afterSize);
     }
 }
