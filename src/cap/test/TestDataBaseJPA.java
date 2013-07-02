@@ -111,7 +111,6 @@ public class TestDataBaseJPA {
 
         assertEquals("http", address.getUrlProtocol());
         assertEquals("www.google.com", address.getWebsite().getHostname());
-        assertEquals("www", address.getUrlSubDomain());
         assertEquals("/recaptcha/learnmore", address.getUrlPath());
         assertEquals("test=1&test=2", address.getUrlParams());
         assertEquals(80, address.getUrlPort());
