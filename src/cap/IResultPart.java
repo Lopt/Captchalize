@@ -1,5 +1,6 @@
 package cap;
 
-public interface IResultPart {
+public interface IResultPart<T> {
 
+    public T getData();
 }
