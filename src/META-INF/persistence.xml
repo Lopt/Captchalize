@@ -7,9 +7,17 @@
                           
 	<persistence-unit name="Captchalize" transaction-type="RESOURCE_LOCAL">
 
-        <class>cap.db.jpa.Website</class>
         <class>cap.db.jpa.CaptchaAddress</class>
+        <class>cap.db.jpa.CaptchaAudio</class>
+        <class>cap.db.jpa.CaptchaImage</class>
+        <class>cap.db.jpa.CaptchaSample</class>
         <class>cap.db.jpa.CaptchaSystem</class>
+        <class>cap.db.jpa.CaptchaText</class>
+        <class>cap.db.jpa.Slot</class>
+        <class>cap.db.jpa.Website</class>
+
+        <!-- SlotFunctionData -->
+        <class>cap.db.jpa.slots.BlurGaussian</class>
 
     </persistence-unit>
 	

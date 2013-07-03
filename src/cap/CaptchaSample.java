@@ -19,12 +19,12 @@ public class CaptchaSample {
 		return null;
 	}
 	
-	public List<IResultPart> getImages() {
+	public List<ResultPart> getImages() {
 		return null;
 	}
 	
 	private ICaptchaSystem system;
-	private List<IResultPart> results;
+	private List<ResultPart> results;
 	//functionPipeline;
 	
 }

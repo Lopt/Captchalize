@@ -3,7 +3,7 @@ package cap.db.jpa;
 /**
  * Authors: Bernd Schmidt, Robert Könitz
  */
-public class SlotNotFoundException extends Exception {
+public class SlotNotFoundException extends ClassNotFoundException {
 
     public SlotNotFoundException() {}
 

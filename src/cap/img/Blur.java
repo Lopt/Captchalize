@@ -1,11 +1,8 @@
 package cap.img;
 
-import cap.img.CaptchaImage;
-import cap.img.CompoundImage;
-
 public class Blur {
 
-	static CompoundImage gaussian(CaptchaImage captchaImage) {
+	public static CompoundImage gaussian(CompoundImage captchaImage) {
 		/*Graphics2D image = captchaImage.getImageData().createGraphics();
 		
 		for (int x = 0; x < image.getWidth(); ++x) {

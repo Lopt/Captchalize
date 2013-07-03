@@ -13,6 +13,7 @@ import javax.persistence.PersistenceUnit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import cap.db.jpa.slots.BlurGaussian;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +26,6 @@ import cap.db.jpa.CaptchaAddress;
 import cap.db.jpa.CaptchaAddressManager;
 import cap.db.jpa.Website;
 import cap.db.jpa.WebsiteManager;
-import cap.db.jpa.ExampleSlotFunction;
 import cap.db.jpa.Slot;
 import cap.db.jpa.SlotManager;
 
@@ -57,6 +57,8 @@ public class TestDataBaseJPA {
         this.proxy.disconnect();
         this.em.close();
         this.emf.close();
+
+        Managers.destroyManagers();
     }
 
     @Test
@@ -125,21 +127,21 @@ public class TestDataBaseJPA {
         SlotManager sfm = Managers.slotManager;
 
         this.em.getTransaction().begin();
-        ExampleSlotFunction slotFunction = new ExampleSlotFunction();
+        BlurGaussian slotFunction = new BlurGaussian();
         slotFunction.setTestValue("Test");
         this.em.persist(slotFunction);
 
-        Slot slot = sfm.create("ExampleSlotFunction", slotFunction.getId());
+        Slot slot = sfm.create("BlurGaussian", slotFunction.getId());
         this.em.getTransaction().commit();
 
-        assertEquals("ExampleSlotFunction", slot.getClassName());
+        assertEquals("BlurGaussian", slot.getClassName());
         assertEquals(slotFunction.getId(), slot.getForeignKey());
 
-        ExampleSlotFunction function = sfm.getFunction("ExampleSlotFunction", slotFunction.getId());
+        BlurGaussian function = sfm.getFunctionData("BlurGaussian", slotFunction.getId());
         assertNotNull(function);
         assertEquals("Test", function.getTestValue());
 
-        function = slot.getFunction();
+        function = slot.getFunctionData();
         assertNotNull(function);
         assertEquals("Test", function.getTestValue());
     }

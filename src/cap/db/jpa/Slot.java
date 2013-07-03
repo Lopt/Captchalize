@@ -3,6 +3,8 @@ package cap.db.jpa;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * Authors: Bernd Schmidt, Robert Könitz
@@ -13,6 +15,10 @@ public class Slot implements ICaptchalizeEntity {
     @Id
     @GeneratedValue
     private long id = 0;
+
+    @ManyToOne
+    @JoinColumn(name = "functionPipelineId")
+    private FunctionPipeline functionPipeline = null;
 
     private String className  = "";
     private long   foreignKey = 0;
@@ -40,9 +46,17 @@ public class Slot implements ICaptchalizeEntity {
         this.foreignKey = foreignKey;
     }
 
-    public <T extends ISlotFunction> T getFunction() {
+    public FunctionPipeline getFunctionPipeline() {
+        return this.functionPipeline;
+    }
+
+    public void setFunctionPipeline(final FunctionPipeline functionPipeline) {
+        this.functionPipeline = functionPipeline;
+    }
+
+    public <T extends ISlotFunctionData> T getFunctionData() {
         try {
-            return Managers.slotManager.getFunction(this.className, this.foreignKey);
+            return Managers.slotManager.getFunctionData(this.className, this.foreignKey);
         } catch (SlotNotFoundException exception) {
             return null;
         }

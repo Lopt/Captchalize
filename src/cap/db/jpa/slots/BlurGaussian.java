@@ -1,4 +1,6 @@
-package cap.db.jpa;
+package cap.db.jpa.slots;
+
+import cap.db.jpa.ISlotFunctionData;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +10,7 @@ import javax.persistence.Id;
  * Authors: Bernd Schmidt, Robert Könitz
  */
 @Entity
-public class ExampleSlotFunction implements ISlotFunction {
+public class BlurGaussian implements ISlotFunctionData {
 
     @Id
     @GeneratedValue
@@ -16,12 +18,7 @@ public class ExampleSlotFunction implements ISlotFunction {
 
     private String testValue = "";
 
-    public ExampleSlotFunction() {}
-
-    @Override
-    public void Run() {
-
-    }
+    public BlurGaussian() {}
 
     @Override
     public long getId() {
