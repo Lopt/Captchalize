@@ -1,6 +1,5 @@
 package cap;
 
-import cap.db.jpa.ISlotFunctionData;
 import cap.db.jpa.Managers;
 import cap.db.jpa.Slot;
 import cap.db.jpa.SlotNotFoundException;

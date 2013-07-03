@@ -48,6 +48,10 @@ public class FunctionPipeline {
         return false;
     }
 
+    public boolean hasNext() {
+        return this.currentSlot.hasNext();
+    }
+
     public <T> ISlotFunction<T> next() {
         if (currentSlot == null) {
             this.currentSlot = this.model.getSlots().iterator();
