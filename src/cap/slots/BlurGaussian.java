@@ -3,7 +3,7 @@ package cap.slots;
 import cap.ISlotFunction;
 import cap.ResultPart;
 import cap.SlotFunction;
-import cap.db.jpa.Slot;
+
 import cap.img.Blur;
 import cap.img.CompoundImage;
 
