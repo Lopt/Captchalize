@@ -19,7 +19,7 @@ public class BlurGaussian extends SlotFunction<CompoundImage> implements ISlotFu
 
     @Override
     public ResultPart<CompoundImage> execute(CompoundImage image) {
-        cap.db.jpa.slots.BlurGaussian data = this.model.getFunctionData();
+        cap.db.jpa.slots.BlurGaussian data = this.getModel().getFunctionData();
 
         String testvalue = data.getTestValue();
 

@@ -9,7 +9,11 @@ import cap.db.jpa.Slot;
 public interface ISlotFunction<T> {
     public long getId();
     public String getName();
+
+    public Slot getModel();
+
     public boolean create(String name);
     public boolean create(Slot slot);
+
     public ResultPart<T> execute(T data);
 }
