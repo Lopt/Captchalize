@@ -1,42 +1,29 @@
 package cap.img;
 
-import java.awt.image.BufferedImage;
-import java.awt.Graphics2D;
+import ij.ImagePlus;
+import java.awt.Point;
 
 public class CaptchaImage {
-	
-	public CaptchaImage(Vector2D position, BufferedImage image) {
-		this.position = position;
-		this.image = image;
-	}
 
-	public CaptchaImage(BufferedImage image) {
-		this.position = new Vector2D();
-		this.image = image;
-	}
+    public CaptchaImage(Point position, ImagePlus image) {
+        this.position = position;
+        this.image = image;
+    }
 
+    public CaptchaImage(ImagePlus image) {
+        this.position = new Point(0, 0);
+        this.image = image;
+    }
 
-	public CaptchaImage(Vector2D position, Graphics2D imageData) {
-		this.position = position;
-		imageData.drawImage(this.image, null, 0, 0);
-	}
-	
-	public CaptchaImage(Graphics2D imageData) {
-		this.position = new Vector2D();
-		imageData.drawImage(this.image, null, 0, 0);
-	}
-	
-	
-	public Vector2D getPosition() {
-		return position;
-	}
+    public Point getPosition() {
+        return position;
+    }
 
-	public Graphics2D getImageData() {
-		return this.image.createGraphics();
-	}
+    public ImagePlus getImageData() {
+        return this.image;
+    }
 
-	
-	private Vector2D position; 
-	private BufferedImage image;
-	
+    private Point position;
+    private ImagePlus image;
+
 }
