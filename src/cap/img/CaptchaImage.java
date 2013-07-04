@@ -1,6 +1,8 @@
 package cap.img;
 
 import ij.ImagePlus;
+import ij.io.Opener;
+
 import java.awt.Point;
 
 public class CaptchaImage {
@@ -15,14 +17,25 @@ public class CaptchaImage {
         this.image = image;
     }
 
-    public Point getPosition() {
-        return position;
+    public CaptchaImage(String path) {
+        this.position = new Point(0, 0);
+        this.image = opener.openImage(path);
     }
 
-    public ImagePlus getImageData() {
+    public Point getPosition() {
+        return this.position;
+    }
+
+    public ImagePlus getImage() {
         return this.image;
     }
 
+    @Override
+    public CaptchaImage clone() {
+        return new CaptchaImage((Point) this.position.clone(), this.image.duplicate());
+    }
+
+    private static Opener opener;
     private Point position;
     private ImagePlus image;
 

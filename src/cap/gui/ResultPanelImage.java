@@ -26,7 +26,7 @@ public class ResultPanelImage extends ResultPanel<CaptchaImage> {
         super.setResultData(result);
 
         try {
-            this.image.setIcon(new ImageIcon(result.getData().getImageData().getBufferedImage()));
+            this.image.setIcon(new ImageIcon(result.getData().getImage().getBufferedImage()));
         } catch (NullPointerException exception) {
             exception.printStackTrace();
         }

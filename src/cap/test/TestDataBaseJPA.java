@@ -12,6 +12,7 @@ import javax.persistence.PersistenceUnit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import cap.db.jpa.slots.BlurGaussian;
 import org.junit.After;
@@ -124,11 +125,13 @@ public class TestDataBaseJPA {
 
     @Test
     public void getSlotFunction() throws Exception {
+        double epsilon = 0.01;
+
         SlotManager sfm = Managers.slotManager;
 
         this.em.getTransaction().begin();
         BlurGaussian slotFunction = new BlurGaussian();
-        slotFunction.setTestValue("Test");
+        slotFunction.setSize(42);
         this.em.persist(slotFunction);
 
         Slot slot = sfm.create("BlurGaussian", slotFunction.getId());
@@ -139,11 +142,13 @@ public class TestDataBaseJPA {
 
         BlurGaussian function = sfm.getFunctionData("BlurGaussian", slotFunction.getId());
         assertNotNull(function);
-        assertEquals("Test", function.getTestValue());
+
+        assertTrue(Math.abs(function.getSize() - 42) < epsilon);
 
         function = slot.getFunctionData();
         assertNotNull(function);
-        assertEquals("Test", function.getTestValue());
+        assertTrue(Math.abs(function.getSize() - 42) < epsilon);
+
     }
 
     @Test

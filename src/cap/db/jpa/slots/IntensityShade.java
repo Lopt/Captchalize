@@ -1,23 +1,23 @@
 package cap.db.jpa.slots;
 
-import cap.db.jpa.ISlotFunctionData;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+import cap.db.jpa.ISlotFunctionData;
 
 /**
  * Authors: Bernd Schmidt, Robert Könitz
  */
 @Entity
-public class BlurGaussian implements ISlotFunctionData {
+public class IntensityShade implements ISlotFunctionData {
 
     @Id
     @GeneratedValue
     private long id = 0;
-    private double size = 0;
+    private int value = 0;
 
-    public BlurGaussian() {
+    public IntensityShade() {
 
     }
 
@@ -26,11 +26,11 @@ public class BlurGaussian implements ISlotFunctionData {
         return this.id;
     }
 
-    public double getSize() {
-        return this.size;
+    public int getValue() {
+        return this.value;
     }
 
-    public void setSize(final double size) {
-        this.size = size;
+    public void setValue(final int value) {
+        this.value = value;
     }
 }
