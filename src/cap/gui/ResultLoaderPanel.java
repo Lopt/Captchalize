@@ -24,7 +24,7 @@ public class ResultLoaderPanel extends JPanel implements ActionListener {
     private static final long serialVersionUID = -858161075567555651L;
 
     private LinkedList<ResultPart> results = null;
-    private ListIterator<ResultPart> current = null;
+    private StepIterator<ResultPart> current = null;
 
     private ResultPanel<CaptchaText> resultPanelText = null; // not used
     private ResultPanel<CaptchaAudio> resultPanelAudio = null; // not used
@@ -46,19 +46,20 @@ public class ResultLoaderPanel extends JPanel implements ActionListener {
         assert parts != null;
 
         this.results = (LinkedList<ResultPart>)parts;
-        this.current = this.results.listIterator();
-        this.showNext();
+        this.current = new StepIterator(this.results.listIterator());
+        this.setResultData(this.current.next());
     }
 
     public void setResultData(final ResultPart part) {
         assert part != null;
+        assert part.getData() != null;
 
         this.changeContent(part.getData().getClass().getName());
         this.currentPanel.setResultData(part);
     }
 
     @Override
-    public void actionPerformed(final ActionEvent actionEvent) {
+    public void actionPerformed(ActionEvent actionEvent) {
         String command = actionEvent.getActionCommand();
 
         if (command.equals("next")) {
@@ -76,13 +77,15 @@ public class ResultLoaderPanel extends JPanel implements ActionListener {
         } else if (name.equals("cap.img.CaptchaImage")) {
             this.currentPanel = this.resultPanelImage;
         }
+
+        this.setNextButtonState();
+        this.setPrevButtonState();
     }
 
     private void showNext() {
         assert this.current != null : "Set result data first.";
 
         if (this.current.hasNext()) {
-            this.setNextButtonState();
             this.setResultData(this.current.next());
         }
     }
@@ -91,7 +94,6 @@ public class ResultLoaderPanel extends JPanel implements ActionListener {
         assert this.current != null : "Set result data first.";
 
         if (this.current.hasPrevious()) {
-            this.setPrevButtonState();
             this.setResultData(this.current.previous());
         }
     }
@@ -116,7 +118,12 @@ public class ResultLoaderPanel extends JPanel implements ActionListener {
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
         this.prevButton = new JButton("<");
+        this.prevButton.setActionCommand("prev");
+        this.prevButton.addActionListener(this);
+
         this.nextButton = new JButton(">");
+        this.nextButton.setActionCommand("next");
+        this.nextButton.addActionListener(this);
 
         this.resultPanelCompoundImage = new ResultPanelCompoundImage();
         this.resultPanelImage = new ResultPanelImage();
@@ -130,5 +137,66 @@ public class ResultLoaderPanel extends JPanel implements ActionListener {
         this.add(this.prevButton);
         this.add(this.content);
         this.add(this.nextButton);
+    }
+}
+
+class StepIterator<T> {
+    private ListIterator<T> iterator = null;
+
+    private boolean next = false;
+    private boolean prev = false;
+
+    public StepIterator(ListIterator<T> iterator) {
+        this.iterator = iterator;
+    }
+
+    public T next() {
+        this.next = true;
+
+        if (this.prev) {
+            this.prev = false;
+            this.iterator.next();
+        }
+
+        return this.iterator.next();
+    }
+
+    public T previous() {
+        this.prev = true;
+
+        if (this.next) {
+            this.next = false;
+            this.iterator.previous();
+        }
+
+        return this.iterator.previous();
+    }
+
+    public void add(final T t) {
+        this.iterator.add(t);
+    }
+
+    public int previousIndex() {
+        return this.iterator.previousIndex();
+    }
+
+    public int nextIndex() {
+        return this.iterator.nextIndex();
+    }
+
+    public void remove() {
+        this.iterator.remove();
+    }
+
+    public void set(final T t) {
+        this.iterator.set(t);
+    }
+
+    public boolean hasNext() {
+        return this.iterator.hasNext();
+    }
+
+    public boolean hasPrevious() {
+        return this.iterator.hasPrevious();
     }
 }
