@@ -10,7 +10,7 @@ import cap.img.CaptchaImage;
  * Authors: Bernd Schmidt, Robert Könitz
  */
 public class RunArguments {
-    private static RunArguments instance = null;
+    private static RunArguments instance = new RunArguments();
 
     private boolean debugGui   = false;
     private boolean debugMode  = false;

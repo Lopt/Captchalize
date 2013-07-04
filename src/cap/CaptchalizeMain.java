@@ -1,6 +1,7 @@
 package cap;
 
 import cap.img.CompoundImage;
+import cap.systems.UnknownCaptchaSystem;
 
 public class CaptchalizeMain {
 
@@ -10,7 +11,7 @@ public class CaptchalizeMain {
 	}
 
 	IResult proceedImage(CompoundImage image) {
-		return this.proceedImage(image, new CaptchaSystemDefault("default"));
+		return this.proceedImage(image, new UnknownCaptchaSystem());
 	}
 	
 
