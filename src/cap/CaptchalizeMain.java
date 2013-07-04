@@ -6,10 +6,7 @@ public class CaptchalizeMain {
 
 	public static void main(String[] arguments) {
         CommandLineInterpreter interpreter = new CommandLineInterpreter();
-
-        String[] args = new String[]{ "-y=reCaptcha", "A", "B", "C" };
-
-        interpreter.run(args);
+        interpreter.run(arguments);
 	}
 
 	IResult proceedImage(CompoundImage image) {

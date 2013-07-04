@@ -1,6 +1,18 @@
 package cap;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.LinkedList;
+import javax.swing.SwingUtilities;
+
 import cap.ArgumentParser;
+import cap.gui.DebugGui;
+import cap.img.CaptchaImage;
+import ij.IJ;
+import ij.ImagePlus;
+import ij.io.Opener;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.OptionBuilder;
@@ -82,11 +94,24 @@ public class CommandLineInterpreter {
         }
 
         if (line.hasOption("debug")) {
-
+            IJ.debugMode = true;
         }
 
         if (line.hasOption("debug-gui")) {
-            
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    DebugGui gui = new DebugGui();
+
+                    Opener opener = new Opener();
+                    ImagePlus image1 = opener.openImage("img/closedbook.png");
+
+                    LinkedList<ResultPart> results = new LinkedList<ResultPart>();
+                    results.add(new ResultPart<CaptchaImage>(new CaptchaImage(image1)));
+
+                    gui.setResultData(results);
+                }
+            });
         }
 
         if (line.hasOption("captcha-system")) {
