@@ -26,14 +26,18 @@ public class CaptchaSystemManager extends CaptchalizeEntityManager<CaptchaSystem
         return system;
     }
 
-    public CaptchaSystem getOrCreate(String name) {
+    public CaptchaSystem get(String name) {
         CriteriaBuilder cb = this.getCriteriaBuilder();
         CriteriaQuery<CaptchaSystem> query = cb.createQuery(CaptchaSystem.class);
         Root<CaptchaSystem> root = query.from(CaptchaSystem.class);
 
         query.where(cb.equal(root.get("name"), name));
 
-        CaptchaSystem system = this.get(query);
+        return this.get(query);
+    }
+
+    public CaptchaSystem getOrCreate(String name) {
+        CaptchaSystem system = this.get(name);
         if (system == null) {
             return this.create(name);
         } else {

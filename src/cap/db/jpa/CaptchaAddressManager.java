@@ -23,7 +23,7 @@ public class CaptchaAddressManager extends CaptchalizeEntityManager<CaptchaAddre
         super(manager);
     }
 
-    public CaptchaAddress create(URL url) {
+    public CaptchaAddress create(final URL url) {
 
         CaptchaAddress address = new CaptchaAddress();
 
@@ -36,7 +36,7 @@ public class CaptchaAddressManager extends CaptchalizeEntityManager<CaptchaAddre
         return address;
     }
 
-    public CaptchaAddress getOrCreate(URL url) {
+    public CaptchaAddress getOrCreate(final URL url) {
         CriteriaBuilder cb = this.getCriteriaBuilder();
         CriteriaQuery<CaptchaAddress> query = cb.createQuery(CaptchaAddress.class);
         Root<CaptchaAddress> root = query.from(CaptchaAddress.class);
