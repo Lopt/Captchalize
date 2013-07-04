@@ -12,22 +12,29 @@ import java.util.Iterator;
 public class FunctionPipeline {
     private cap.db.jpa.FunctionPipeline model = null;
     private String name = "";
+    private boolean buildMode = false;
     private Iterator<Slot> currentSlot = null;
 
     public FunctionPipeline(String name) {
-        this.name = name;
-        this.model = Managers.functionPipelineManager.get(name);
+        this(name, false);
     }
 
-    public FunctionPipeline(String name, boolean build) {
-        this(name);
+    public FunctionPipeline(String name, boolean buildMode) {
+        this.name = name;
+        this.buildMode = buildMode;
 
-        if (build && this.model == null) {
-            this.model = Managers.functionPipelineManager.create(name);
+        if (buildMode) {
+            this.model = Managers.functionPipelineManager.getOrCreate(name);
+        } else {
+            this.model = Managers.functionPipelineManager.get(name);
         }
     }
 
     public boolean register(String name, ISlotFunction function) {
+        if (!this.buildMode) {
+            throw new IllegalRegisterException("Register usable only at build mode.");
+        }
+
         assert this.model != null;
         assert this.currentSlot == null;
 
@@ -48,6 +55,10 @@ public class FunctionPipeline {
     }
 
     public boolean unregister(String name) {
+        if (!this.buildMode) {
+            throw new IllegalRegisterException("Unregister usable only at build mode.");
+        }
+
         assert this.model != null;
         assert this.currentSlot == null;
 
