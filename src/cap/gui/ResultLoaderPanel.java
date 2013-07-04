@@ -172,26 +172,6 @@ class StepIterator<T> {
         return this.iterator.previous();
     }
 
-    public void add(final T t) {
-        this.iterator.add(t);
-    }
-
-    public int previousIndex() {
-        return this.iterator.previousIndex();
-    }
-
-    public int nextIndex() {
-        return this.iterator.nextIndex();
-    }
-
-    public void remove() {
-        this.iterator.remove();
-    }
-
-    public void set(final T t) {
-        this.iterator.set(t);
-    }
-
     public boolean hasNext() {
         return this.iterator.hasNext();
     }
