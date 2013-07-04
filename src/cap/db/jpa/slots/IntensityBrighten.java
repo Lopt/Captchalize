@@ -10,14 +10,14 @@ import javax.persistence.Id;
  * Authors: Bernd Schmidt, Robert Könitz
  */
 @Entity
-public class BlurGaussian implements ISlotFunctionData {
+public class IntensityBrighten implements ISlotFunctionData {
 
     @Id
     @GeneratedValue
     private long id = 0;
-    private double size = 0;
+    private int value = 0;
 
-    public BlurGaussian() {
+    public IntensityBrighten() {
 
     }
 
@@ -26,11 +26,11 @@ public class BlurGaussian implements ISlotFunctionData {
         return this.id;
     }
 
-    public double getSize() {
-        return this.size;
+    public int getValue() {
+        return this.value;
     }
 
-    public void setSize(final double size) {
-        this.size = size;
+    public void setValue(final int value) {
+        this.value = value;
     }
 }
