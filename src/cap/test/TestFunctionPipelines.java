@@ -60,9 +60,8 @@ public class TestFunctionPipelines {
 
         this.em.getTransaction().begin();
 
-        FunctionPipeline pipeline = new FunctionPipeline("TestBlur");
-        pipeline.load();
-
+        FunctionPipeline pipeline = new FunctionPipeline("TestBlur", true);
+        
         boolean test = pipeline.register("First Function", new BlurGaussian());
 
         this.em.getTransaction().commit();

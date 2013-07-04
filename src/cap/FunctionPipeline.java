@@ -19,8 +19,12 @@ public class FunctionPipeline {
         this.model = Managers.functionPipelineManager.get(name);
     }
 
-    public void load() {
-        this.model = Managers.functionPipelineManager.getOrCreate(name);
+    public FunctionPipeline(String name, boolean build) {
+        this(name);
+
+        if (build && this.model == null) {
+            this.model = Managers.functionPipelineManager.create(name);
+        }
     }
 
     public boolean register(String name, ISlotFunction function) {
