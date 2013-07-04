@@ -26,14 +26,18 @@ public class FunctionPipelineManager extends CaptchalizeEntityManager<FunctionPi
         return pipeline;
     }
 
-    public FunctionPipeline getOrCreate(String name) {
+    public FunctionPipeline get(String name) {
         CriteriaBuilder cb = this.getCriteriaBuilder();
         CriteriaQuery<FunctionPipeline> query = cb.createQuery(FunctionPipeline.class);
         Root<FunctionPipeline> root = query.from(FunctionPipeline.class);
 
         query.where(cb.equal(root.get("name"), name));
 
-        FunctionPipeline pipeline = this.get(query);
+        return this.get(query);
+    }
+
+    public FunctionPipeline getOrCreate(String name) {
+        FunctionPipeline pipeline = this.get(name);
         if (pipeline == null) {
             return this.create(name);
         } else {

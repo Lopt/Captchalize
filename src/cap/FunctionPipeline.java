@@ -16,6 +16,7 @@ public class FunctionPipeline {
 
     public FunctionPipeline(String name) {
         this.name = name;
+        this.model = Managers.functionPipelineManager.get(name);
     }
 
     public void load() {
@@ -42,7 +43,7 @@ public class FunctionPipeline {
         return true;
     }
 
-    public boolean unregister(String name, ISlotFunction function) {
+    public boolean unregister(String name) {
         assert this.model != null;
         assert this.currentSlot == null;
 
