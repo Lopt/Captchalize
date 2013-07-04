@@ -6,6 +6,7 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceUnit;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import cap.slots.BlurGaussian;
 import org.junit.After;
@@ -35,7 +36,7 @@ public class TestFunctionPipelines {
 
     @Before
     public void initEmfAndEm() throws Exception {
-        this.proxy.setDatabaseName("file:db/hsql_test.db");
+        this.proxy.setDatabaseName("file:db/slot_test.db");
         this.proxy.connect();
 
         this.emf = Persistence.createEntityManagerFactory("Captchalize", proxy.getHibernateConfig());
@@ -55,18 +56,24 @@ public class TestFunctionPipelines {
 
     @Test
     public void createFunctionPipeline() {
+        long countBefore = Managers.slotManager.getCount();
+
         this.em.getTransaction().begin();
 
         FunctionPipeline pipeline = new FunctionPipeline("TestBlur");
         pipeline.load();
 
-        pipeline.register(BlurGaussian.get());
+        boolean test = pipeline.register("First Function", new BlurGaussian());
 
         this.em.getTransaction().commit();
 
-        ISlotFunction function = pipeline.next();
-        assertEquals("BlurGaussian", function.getName());
+        assertTrue(test);
 
+        long countAfter = Managers.slotManager.getCount();
+        assertEquals(countBefore, countAfter);
+
+        ISlotFunction function = pipeline.next();
+        assertEquals("BlurGaussian", function.getClassName());
         assertEquals("cap.ResultPart", function.execute(null).getClass().getName());
     }
 }

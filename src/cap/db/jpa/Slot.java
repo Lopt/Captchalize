@@ -20,6 +20,7 @@ public class Slot implements ICaptchalizeEntity {
     @JoinColumn(name = "functionPipelineId")
     private FunctionPipeline functionPipeline = null;
 
+    private String name       = "";
     private String className  = "";
     private long   foreignKey = 0;
 
@@ -28,6 +29,14 @@ public class Slot implements ICaptchalizeEntity {
     @Override
     public long getId() {
         return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(final String name) {
+        this.name = name;
     }
 
     public String getClassName() {

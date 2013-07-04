@@ -8,6 +8,7 @@ import cap.db.jpa.Slot;
 
 public interface ISlotFunction<T> {
     public long getId();
+    public String getClassName();
     public String getName();
 
     public Slot getModel();

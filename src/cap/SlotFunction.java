@@ -32,17 +32,20 @@ public abstract class SlotFunction<T> implements ISlotFunction<T> {
     }
 
     @Override
+    public String getName() {
+        assert this.model != null : "Slot is not created.";
+
+        return this.model.getName();
+    }
+
+    @Override
+    public abstract String getClassName();
+
+    @Override
     public long getId() {
         assert this.model != null : "Slot is not created.";
 
         return this.model.getForeignKey();
-    }
-
-    @Override
-    public String getName() {
-        assert this.model != null : "Slot is not created.";
-
-        return this.model.getClassName();
     }
 
     @Override

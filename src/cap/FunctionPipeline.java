@@ -22,24 +22,31 @@ public class FunctionPipeline {
         this.model = Managers.functionPipelineManager.getOrCreate(name);
     }
 
-    public boolean register(ISlotFunction function) {
+    public boolean register(String name, ISlotFunction function) {
         assert this.model != null;
         assert this.currentSlot == null;
 
-        Slot slot = Managers.slotManager.find(function.getName(), function.getId());
-        if (slot != null) {
+        Slot slot = Managers.slotManager.find(this.model, name);
+        if (slot == null) {
+            if (!function.create(function.getClassName())) {
+                return false;
+            }
+
+            slot = function.getModel();
+            slot.setFunctionPipeline(this.model);
+            slot.setName(name);
+
             this.model.getSlots().add(slot);
-            return true;
         }
 
-        return false;
+        return true;
     }
 
-    public boolean unregister(ISlotFunction function) {
+    public boolean unregister(String name, ISlotFunction function) {
         assert this.model != null;
         assert this.currentSlot == null;
 
-        Slot slot = Managers.slotManager.find(function.getName(), function.getId());
+        Slot slot = Managers.slotManager.find(this.model, name);
         if (slot != null) {
             this.model.getSlots().remove(slot);
             return true;

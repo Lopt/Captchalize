@@ -64,14 +64,27 @@ public class SlotManager extends CaptchalizeEntityManager<Slot>
         return slotFunction;
     }
 
-    public Slot find(String name, long key) {
+    public Slot find(String className, long key) {
         CriteriaBuilder cb = this.getCriteriaBuilder();
         CriteriaQuery<Slot> query = cb.createQuery(Slot.class);
         Root<Slot> root = query.from(Slot.class);
 
         query.where(cb.and(
-            cb.equal(root.get("className"), name),
-            cb.equal(root.get("foreignKey"), key)));
+            cb.equal(root.get("className"), className),
+            cb.equal(root.get("foreignKey"), key)
+        ));
+
+        return this.get(query);
+    }
+
+    public Slot find(FunctionPipeline pipeline, String name) {
+        CriteriaBuilder cb = this.getCriteriaBuilder();
+        CriteriaQuery<Slot> query = cb.createQuery(Slot.class);
+        Root<Slot> root = query.from(Slot.class);
+
+        query.where(cb.and(
+            cb.equal(root.get("functionPipeline").get("id"), pipeline.getId()),
+            cb.equal(root.get("name"), name)));
 
         return this.get(query);
     }
