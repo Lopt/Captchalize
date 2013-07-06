@@ -22,8 +22,8 @@ public class TestDebugGui {
                 DebugGui gui = new DebugGui();
 
                 Opener opener = new Opener();
-                ImagePlus image1 = opener.openImage("img/openedbook.png");
-                ImagePlus image2 = opener.openImage("img/closedbook.png");
+                ImagePlus image1 = opener.openImage("testdata/img/openedbook.png");
+                ImagePlus image2 = opener.openImage("testdata/img/closedbook.png");
 
                 LinkedList<ResultPart> results = new LinkedList<ResultPart>();
                 results.add(new ResultPart<CaptchaImage>(new CaptchaImage(image1)));

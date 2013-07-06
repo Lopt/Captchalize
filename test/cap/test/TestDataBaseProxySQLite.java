@@ -18,7 +18,7 @@ public class TestDataBaseProxySQLite extends TestDataBaseProxy {
 
     @Before
     public void initProxy() {
-        this.proxy.setDatabaseName("db/sqlite_test.db");
+        this.proxy.setDatabaseName("testdata/db/sqlite_test.db");
     }
 
     @Test

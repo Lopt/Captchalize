@@ -44,7 +44,7 @@ public class TestDataBaseJPA {
 
     @Before
     public void initEmfAndEm() throws Exception {
-        this.proxy.setDatabaseName("file:db/hsql_test.db");
+        this.proxy.setDatabaseName("file:testdata/db/hsql_test.db");
         this.proxy.connect();
 
         this.emf = Persistence.createEntityManagerFactory("Captchalize", proxy.getHibernateConfig());

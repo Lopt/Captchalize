@@ -8,6 +8,7 @@ import javax.persistence.PersistenceUnit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import cap.img.CompoundImage;
 import cap.slots.BlurGaussian;
 import org.junit.After;
 import org.junit.Before;
@@ -36,7 +37,7 @@ public class TestFunctionPipelines {
 
     @Before
     public void initEmfAndEm() throws Exception {
-        this.proxy.setDatabaseName("file:db/slot_test.db");
+        this.proxy.setDatabaseName("file:testdata/db/slot_test.db");
         this.proxy.connect();
 
         this.emf = Persistence.createEntityManagerFactory("Captchalize", proxy.getHibernateConfig());
@@ -73,6 +74,6 @@ public class TestFunctionPipelines {
 
         ISlotFunction function = pipeline.next();
         assertEquals("BlurGaussian", function.getClassName());
-        assertEquals("cap.ResultPart", function.execute(null).getClass().getName());
+        assertEquals("cap.ResultPart", function.execute(new CompoundImage()).getClass().getName());
     }
 }

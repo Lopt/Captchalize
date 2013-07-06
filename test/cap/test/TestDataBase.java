@@ -6,9 +6,9 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
 @SuiteClasses({
-    cap.test.TestDataBaseProxyHSQL.class,
-    cap.test.TestDataBaseProxyMySQL.class,
-    cap.test.TestDataBaseProxySQLite.class,
-    cap.test.TestDataBaseJPA.class,
+    TestDataBaseProxyHSQL.class,
+    TestDataBaseProxyMySQL.class,
+    TestDataBaseProxySQLite.class,
+    TestDataBaseJPA.class,
 })
 public class TestDataBase {}

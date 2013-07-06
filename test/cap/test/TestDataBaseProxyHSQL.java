@@ -18,7 +18,7 @@ public class TestDataBaseProxyHSQL extends TestDataBaseProxy {
 
     @Before
     public void initProxy() {
-        this.proxy.setDatabaseName("file:db/hsql_test.db");
+        this.proxy.setDatabaseName("file:testdata/db/hsql_test.db");
     }
 
     @Test
