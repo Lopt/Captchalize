@@ -38,5 +38,5 @@ public class CompoundImage {
         return compoundImage;
     }
 
-	private ArrayList<CaptchaImage> images;
+	private ArrayList<CaptchaImage> images = new ArrayList<CaptchaImage>();
 }
