@@ -22,7 +22,7 @@ public class Blur {
         return newCompoundImage;
     }
 
-    public static CompoundImage median(final CompoundImage compoundImage, final double size) {
+    public static CompoundImage median(final CompoundImage compoundImage) {
         CompoundImage newCompoundImage = compoundImage.clone();
 
         for (CaptchaImage captchaImage : newCompoundImage.getImages()) {
