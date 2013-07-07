@@ -18,9 +18,8 @@ public class BlurMedian extends SlotFunction<CompoundImage> implements ISlotFunc
 
     @Override
     public ResultPart<CompoundImage> execute(CompoundImage image) {
-        cap.db.jpa.slots.BlurMedian data = this.getModel().getFunctionData();
+        //cap.db.jpa.slots.BlurMedian data = this.getModel().getFunctionData();
 
-        double size = data.getSize();
-        return new ResultPart<CompoundImage>( Blur.median(image, size) );
+        return new ResultPart<CompoundImage>( Blur.median(image) );
     }
 }

@@ -19,20 +19,21 @@ public class Intensity {
     public static ImagePlus remove(ImagePlus image,
                                    final int beginIntervalParam,
                                    final int endIntervalParam,
+                                   final int standardValue,
                                    final boolean includeBegin,
                                    final boolean includeEnd) {
 
-        int beginInterval = includeBegin ? beginIntervalParam - 1 : beginIntervalParam;
-        int endInterval   = includeEnd   ? endIntervalParam   - 1 : endIntervalParam;
+        int beginInterval = includeBegin ? beginIntervalParam : beginIntervalParam - 1;
+        int endInterval   = includeEnd   ? endIntervalParam : endIntervalParam   + 1;
 
         ImageProcessor imageProcessor = image.getProcessor();
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
 
                 int pixelValue = image.getPixel(x, y)[0];
-                boolean inArea = (beginInterval > pixelValue && endInterval < pixelValue);
+                boolean inArea = (beginInterval < pixelValue && pixelValue < endInterval);
 
-                int newValue = (inArea) ? pixelValue : 0;
+                int newValue = (inArea) ? standardValue : pixelValue;
                 imageProcessor.set(x, y, newValue);
             }
         }
@@ -42,6 +43,7 @@ public class Intensity {
     public static CompoundImage remove(CompoundImage compoundImage,
                                    final int beginInterval,
                                    final int endInterval,
+                                   final int standardValue,
                                    final boolean includingBegin,
                                    final boolean includingEnd) {
 
@@ -53,6 +55,7 @@ public class Intensity {
                 images[channel] = Intensity.remove(images[channel],
                                                    beginInterval,
                                                    endInterval,
+                                                   standardValue,
                                                    includingBegin,
                                                    includingEnd);
             }

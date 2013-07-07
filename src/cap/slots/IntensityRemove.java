@@ -22,9 +22,10 @@ public class IntensityRemove extends SlotFunction<CompoundImage> implements ISlo
 
         int beginInterval    = data.getBeginInterval();
         int endInterval      = data.getEndInterval();
+        int standardValue    = data.getStandardValue();
         boolean includeBegin = data.getIncludeBegin();
         boolean includeEnd   = data.getIncludeEnd();
 
-        return new ResultPart<CompoundImage>(Intensity.remove(image, beginInterval, endInterval, includeBegin, includeEnd));
+        return new ResultPart<CompoundImage>(Intensity.remove(image, beginInterval, endInterval, standardValue, includeBegin, includeEnd));
     }
 }

@@ -15,8 +15,9 @@ public class IntensityRemove implements ISlotFunctionData {
     @Id
     @GeneratedValue
     private long id = 0;
-    private int beginInterval = 0;
-    private int endInterval   = 255;
+    private int beginInterval    = 0;
+    private int endInterval      = 255;
+    private int standardValue    = 255;
     private boolean includeBegin = true;
     private boolean includeEnd   = true;
 
@@ -45,6 +46,10 @@ public class IntensityRemove implements ISlotFunctionData {
         this.includeEnd = includeEnd;
     }
 
+    public void setStandardValue(int standardValue) {
+        this.standardValue = standardValue;
+    }
+
     public boolean getIncludeBegin() {
         return this.includeBegin;
     }
@@ -61,5 +66,8 @@ public class IntensityRemove implements ISlotFunctionData {
         return this.beginInterval;
     }
 
+    public int getStandardValue() {
+        return this.standardValue;
+    }
 
 }

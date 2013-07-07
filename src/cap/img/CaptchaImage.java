@@ -35,7 +35,7 @@ public class CaptchaImage {
         return new CaptchaImage((Point) this.position.clone(), this.image.duplicate());
     }
 
-    private static Opener opener;
+    private static Opener opener = new Opener();
     private Point position;
     private ImagePlus image;
 
