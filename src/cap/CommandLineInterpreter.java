@@ -1,18 +1,10 @@
 package cap;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.LinkedList;
-import javax.swing.SwingUtilities;
+import java.net.MalformedURLException;
+import java.net.URL;
 
-import cap.ArgumentParser;
-import cap.gui.DebugGui;
-import cap.img.CaptchaImage;
+import cap.systems.UnknownCaptchaSystem;
 import ij.IJ;
-import ij.ImagePlus;
-import ij.io.Opener;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.OptionBuilder;
@@ -93,42 +85,25 @@ public class CommandLineInterpreter {
             return;
         }
 
-        if (line.hasOption("debug")) {
-            IJ.debugMode = true;
-        }
+        RunArguments args = RunArguments.getInstance();
 
-        if (line.hasOption("debug-gui")) {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    DebugGui gui = new DebugGui();
-
-                    Opener opener = new Opener();
-                    ImagePlus image1 = opener.openImage("img/openedbook.png");
-                    ImagePlus image2 = opener.openImage("img/closedbook.png");
-
-                    LinkedList<ResultPart> results = new LinkedList<ResultPart>();
-                    results.add(new ResultPart<CaptchaImage>(new CaptchaImage(image1)));
-                    results.add(new ResultPart<CaptchaImage>(new CaptchaImage(image2)));
-
-                    gui.setResultData(results);
-                }
-            });
-        }
+        args.setDebugMode(line.hasOption("debug"));
+        args.setDebugGui(line.hasOption("debug-gui"));
 
         if (line.hasOption("captcha-system")) {
-            System.out.println(line.getOptionValue("captcha-system"));
+            args.setCaptchaSystem(UnknownCaptchaSystem.findSystem(line.getOptionValue("captcha-system")));
         }
 
         if (line.hasOption("server-mode")) {
-            return;
+            args.setServerMode(true);
         } else if (line.hasOption("find")) {
-            System.out.println(line.getOptionValue("find"));
-            return;
-        }
-
-        for (String imagePath : line.getArgs()) {
-            System.out.println(imagePath);
+            try {
+                args.setFindOn(new URL(line.getOptionValue("find")));
+            } catch (MalformedURLException exception) {
+                System.out.println(exception.getMessage());
+            }
+        } else {
+            args.setImages(line.getArgs());
         }
     }
 }
