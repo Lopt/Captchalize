@@ -3,6 +3,7 @@ package cap;
 import java.net.URL;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import cap.img.CaptchaImage;
 
@@ -15,6 +16,9 @@ public class RunArguments {
     private boolean debugGui   = false;
     private boolean debugMode  = false;
     private boolean serverMode = false;
+
+    private long maxImageSize = 524288; // 512 kByte
+    private long maxRequestSize = 3145728; // 3 MByte
 
     private ICaptchaSystem captchaSystem = null;
     private LinkedList<CaptchaImage> images = null;
@@ -78,6 +82,22 @@ public class RunArguments {
 
     public void setFindOn(final URL findOn) {
         this.findOn = findOn;
+    }
+
+    public long getMaxImageSize() {
+        return this.maxImageSize;
+    }
+
+    public void setMaxImageSize(final long maxImageSize) {
+        this.maxImageSize = maxImageSize;
+    }
+
+    public long getMaxRequestSize() {
+        return this.maxRequestSize;
+    }
+
+    public void setMaxRequestSize(final long maxRequestSize) {
+        this.maxRequestSize = maxRequestSize;
     }
 
     private RunArguments() {}

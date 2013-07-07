@@ -15,8 +15,11 @@ public class UnknownCaptchaSystem implements ICaptchaSystem {
 
     public static <T extends ICaptchaSystem> T findSystem(String name) {
         cap.db.jpa.CaptchaSystem systemData = Managers.captchaSystemManager.get(name);
+
         if (systemData == null) {
-            return null;
+            UnknownCaptchaSystem unknownSystem = new UnknownCaptchaSystem(name);
+            unknownSystem.setModel(Managers.captchaSystemManager.create(name));
+            return (T)unknownSystem;
         }
 
         T system = null;
@@ -29,6 +32,8 @@ public class UnknownCaptchaSystem implements ICaptchaSystem {
         } catch (InstantiationException exception) {
             return null;
         }
+
+        system.setModel(systemData);
 
         return system;
     }

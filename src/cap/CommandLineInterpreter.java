@@ -38,6 +38,20 @@ public class CommandLineInterpreter {
             .withDescription("running in server mode.")
             .create("s");
 
+        Option maxImageSize = OptionBuilder
+            .withLongOpt("max-image-size")
+            .withDescription("maximum upload size of an image. default: 512 kBytes)")
+            .hasArg()
+            .withArgName("kilobytes")
+            .create();
+
+        Option maxRequestSize = OptionBuilder
+            .withLongOpt("max-request-size")
+            .withDescription("maximum upload size of all images on a single request. (default 3072 kBytes)")
+            .hasArg()
+            .withArgName("kilobytes")
+            .create();
+
         Option parseMode = OptionBuilder
             .withLongOpt("find")
             .withDescription("find and analyze a CAPTCHA from a website.")
@@ -55,12 +69,12 @@ public class CommandLineInterpreter {
         Option debugMode = OptionBuilder
             .withLongOpt("debug")
             .withDescription("print step by step results.")
-            .create();
+            .create("d");
 
         Option debugGUIMode = OptionBuilder
             .withLongOpt("debug-gui")
             .withDescription("offer a gui for step by step results.")
-            .create();
+            .create("g");
 
         Option help = OptionBuilder
             .withLongOpt("help")
@@ -70,6 +84,8 @@ public class CommandLineInterpreter {
         Options op = this.parser.getOptions();
 
         op.addOption(serverMode);
+        op.addOption(maxImageSize);
+        op.addOption(maxRequestSize);
         op.addOption(parseMode);
         op.addOption(captchaSystem);
         op.addOption(debugMode);
@@ -96,6 +112,14 @@ public class CommandLineInterpreter {
 
         if (line.hasOption("server-mode")) {
             args.setServerMode(true);
+
+            if (line.hasOption("max-image-size")) {
+                args.setMaxImageSize(Long.parseLong(line.getOptionValue("max-image-size")) * 1024);
+            }
+            if (line.hasOption("max-request-size")) {
+                args.setMaxRequestSize(Long.parseLong(line.getOptionValue("max-request-size")) * 1024);
+            }
+
         } else if (line.hasOption("find")) {
             try {
                 args.setFindOn(new URL(line.getOptionValue("find")));
