@@ -6,7 +6,7 @@ import cap.db.jpa.Slot;
  * Authors: Bernd Schmidt, Robert Könitz
  */
 
-public interface ISlotFunction<T> {
+public interface ISlotFunction<Input, Output> {
     public long getId();
     public String getClassName();
     public String getName();
@@ -16,5 +16,5 @@ public interface ISlotFunction<T> {
     public boolean create(String name);
     public boolean create(Slot slot);
 
-    public ResultPart<T> execute(T data);
+    public ResultPart<Output> execute(Input data);
 }

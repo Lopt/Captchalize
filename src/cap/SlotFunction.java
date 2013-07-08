@@ -7,7 +7,7 @@ import cap.db.jpa.SlotNotFoundException;
 /**
  * Authors: Bernd Schmidt, Robert Könitz
  */
-public abstract class SlotFunction<T> implements ISlotFunction<T> {
+public abstract class SlotFunction<Input, Output> implements ISlotFunction<Input, Output> {
     private Slot model = null;
 
     public Slot getModel() {
@@ -49,5 +49,5 @@ public abstract class SlotFunction<T> implements ISlotFunction<T> {
     }
 
     @Override
-    public abstract ResultPart<T> execute(final T data);
+    public abstract ResultPart<Output> execute(final Input data);
 }

@@ -9,7 +9,7 @@ import cap.img.Morph;
 /**
  * Authors: Bernd Schmidt, Robert Könitz
  */
-public class MorphErode extends SlotFunction<CompoundImage> implements ISlotFunction<CompoundImage> {
+public class MorphErode extends SlotFunction<CompoundImage, CompoundImage> implements ISlotFunction<CompoundImage, CompoundImage> {
 
     @Override
     public String getClassName() {

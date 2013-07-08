@@ -9,7 +9,7 @@ import cap.img.CompoundImage;
 /**
  * Authors: Bernd Schmidt, Robert Könitz
  */
-public class BlurMedian extends SlotFunction<CompoundImage> implements ISlotFunction<CompoundImage> {
+public class BlurMedian extends SlotFunction<CompoundImage, CompoundImage> implements ISlotFunction<CompoundImage, CompoundImage> {
 
     @Override
     public String getClassName() {

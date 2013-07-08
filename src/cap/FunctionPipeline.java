@@ -75,16 +75,16 @@ public class FunctionPipeline {
         return this.currentSlot.hasNext();
     }
 
-    public <T> ISlotFunction<T> next() {
+    public <Input, Output> ISlotFunction<Input, Output> next() {
         if (currentSlot == null) {
             this.currentSlot = this.model.getSlots().iterator();
         }
 
         Slot slot = this.currentSlot.next();
-        SlotFunction<T> function = null;
+        SlotFunction<Input, Output> function = null;
 
         try {
-            function = (SlotFunction<T>)Class.forName("cap.slots." + slot.getClassName()).newInstance();
+            function = (SlotFunction<Input, Output>)Class.forName("cap.slots." + slot.getClassName()).newInstance();
         } catch(ClassNotFoundException exception) {
             return null;
         } catch (IllegalAccessException exception) {

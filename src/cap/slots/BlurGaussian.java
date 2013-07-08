@@ -10,7 +10,7 @@ import cap.img.CompoundImage;
 /**
  * Authors: Bernd Schmidt, Robert Könitz
  */
-public class BlurGaussian extends SlotFunction<CompoundImage> implements ISlotFunction<CompoundImage> {
+public class BlurGaussian extends SlotFunction<CompoundImage, CompoundImage> implements ISlotFunction<CompoundImage, CompoundImage> {
 
     @Override
     public String getClassName() {

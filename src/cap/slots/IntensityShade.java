@@ -9,7 +9,7 @@ import cap.img.CompoundImage;
 /**
  * Authors: Bernd Schmidt, Robert Könitz
  */
-public class IntensityShade extends SlotFunction<CompoundImage> implements ISlotFunction<CompoundImage> {
+public class IntensityShade extends SlotFunction<CompoundImage, CompoundImage> implements ISlotFunction<CompoundImage, CompoundImage> {
 
     @Override
     public String getClassName() {
