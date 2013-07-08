@@ -36,7 +36,7 @@ public class ReCAPTCHA implements ICaptchaSystem {
     }
 
     @Override
-    public boolean isCaptcha(final CaptchaImage image) {
-        return true;
+    public float isCaptcha(final CaptchaImage image) {
+        return 1;
     }
 }

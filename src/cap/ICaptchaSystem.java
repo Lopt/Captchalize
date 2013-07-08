@@ -9,6 +9,6 @@ public interface ICaptchaSystem {
     public CaptchaSystem getModel();
     public void setModel(CaptchaSystem model);
 
-    public boolean isCaptcha(CaptchaImage image);
+    public float isCaptcha(CaptchaImage image);
     public CaptchaSample createCaptcha(CaptchaImage image);
 }

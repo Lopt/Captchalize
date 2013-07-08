@@ -1,5 +1,7 @@
 package cap.systems;
 
+import java.util.Collection;
+
 import cap.CaptchaSample;
 import cap.ICaptchaSystem;
 import cap.db.jpa.CaptchaSystem;
@@ -25,7 +27,7 @@ public class UnknownCaptchaSystem implements ICaptchaSystem {
         T system = null;
         try {
             system = (T)Class.forName("cap.systems." + systemData.getName()).newInstance();
-        } catch(ClassNotFoundException exception) {
+        } catch (ClassNotFoundException exception) {
             return null;
         } catch (IllegalAccessException exception) {
             return null;
@@ -35,6 +37,28 @@ public class UnknownCaptchaSystem implements ICaptchaSystem {
 
         system.setModel(systemData);
 
+        return system;
+    }
+
+    public static ICaptchaSystem findSystem(CaptchaImage captchaImage) {
+        Collection<CaptchaSystem> captchaSystems = Managers.captchaSystemManager.findAll();
+
+        ICaptchaSystem system = null;
+        float highestMatch = 0;
+        for (CaptchaSystem systemData : captchaSystems) {
+            try {
+                ICaptchaSystem newSystem = (ICaptchaSystem) Class.forName("cap.systems." + systemData.getName()).newInstance();
+                float match = newSystem.isCaptcha(captchaImage);
+                if (system == null || match >= highestMatch) {
+                    highestMatch = match;
+                    system = newSystem;
+                }
+
+            } catch (ClassNotFoundException exception) {
+            } catch (IllegalAccessException exception) {
+            } catch (InstantiationException exception) {
+            }
+        }
         return system;
     }
 
@@ -78,7 +102,8 @@ public class UnknownCaptchaSystem implements ICaptchaSystem {
     }
 
     @Override
-    public boolean isCaptcha(final CaptchaImage image) {
-        return true;
+    public float isCaptcha(final CaptchaImage image) {
+        return 0;
     }
 }
+
