@@ -1,7 +1,9 @@
 package cap.systems;
 
 import cap.CaptchaSample;
+import cap.FunctionPipeline;
 import cap.ICaptchaSystem;
+import cap.ProcessException;
 import cap.db.jpa.CaptchaSystem;
 import cap.img.CaptchaImage;
 
@@ -31,12 +33,12 @@ public class ReCAPTCHA implements ICaptchaSystem {
     }
 
     @Override
-    public CaptchaSample createCaptcha(final CaptchaImage image) {
-        return null;
+    public float isCaptcha(final CaptchaImage image) {
+        return 1;
     }
 
     @Override
-    public float isCaptcha(final CaptchaImage image) {
-        return 1;
+    public FunctionPipeline getFunctionPipeline(final CaptchaSample sample) throws ProcessException {
+        return null;
     }
 }

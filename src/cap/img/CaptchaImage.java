@@ -33,6 +33,11 @@ public class CaptchaImage {
         this.image = new ImagePlus(path.getName());
     }
 
+    public CaptchaImage(String path) {
+        this.position = new Point(0, 0);
+        this.image = new ImagePlus(path);
+    }
+
     public Point getPosition() {
         return this.position;
     }

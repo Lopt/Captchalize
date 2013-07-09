@@ -10,5 +10,5 @@ public interface ICaptchaSystem {
     public void setModel(CaptchaSystem model);
 
     public float isCaptcha(CaptchaImage image);
-    public CaptchaSample createCaptcha(CaptchaImage image);
+    public FunctionPipeline getFunctionPipeline(CaptchaSample sample) throws ProcessException;
 }
