@@ -1,7 +1,7 @@
 package cap.img;
 
 
-import ij.process.ImageProcessor;
+import cap.ProcessException;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
@@ -23,4 +23,31 @@ public class OCR {
         }
         return result;
     }
+
+    public static String asAlphanumeric(final String text) throws ProcessException {
+        if (text.matches("[A-Za-z0-9]+")) {
+            throw new ProcessException("is not alphanumeric");
+        }
+        return text;
+    }
+
+    public static String asNumeric(final String text) throws ProcessException {
+        if (text.matches("[0-9]+")) {
+            throw new ProcessException("is not numeric");
+        }
+        return text;
+    }
+
+    public static String asAlphabetic(final String text) throws ProcessException {
+        if (text.matches("[A-Za-z]+")) {
+            throw new ProcessException("is not alphabetic");
+        }
+        return text;
+    }
+
+    public static String findInDictionary(final String text) {
+        return text;
+    }
+
+
 }
