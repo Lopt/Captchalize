@@ -22,7 +22,7 @@ public class ServerOrderManager extends CaptchalizeEntityManager<ServerOrder>
         Set<CaptchaSample> samples = new HashSet<CaptchaSample>();
 
         for (CaptchaImage image : images) {
-            samples.add(manager.create()); // TODO
+            samples.add(manager.create(image));
         }
 
         return this.create(samples);
@@ -30,7 +30,7 @@ public class ServerOrderManager extends CaptchalizeEntityManager<ServerOrder>
 
     public ServerOrder create(Set<CaptchaSample> samples) {
         ServerOrder serverOrder = new ServerOrder();
-        //serverOrder.setCaptchaSamples(samples);
+        serverOrder.setCaptchaSamples(samples);
         return serverOrder;
     }
 

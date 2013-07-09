@@ -39,8 +39,8 @@ public class CaptchalizeRunner implements Runnable {
         CaptchaSample sample = this.captchaSampleQueue.poll();
         this.processCaptchaSample(sample);
 
-        //ServerOrder serverOrder = sample.getModel().getServerOrder(); TODO
-        //serverOrder.toProgress();
+        ServerOrder serverOrder = sample.getModel().getServerOrder();
+        serverOrder.toProgress();
     }
 
     private void processCaptchaSample(CaptchaSample sample) {

@@ -28,7 +28,7 @@ public class ServerOrder implements ICaptchalizeEntity {
         return this.id;
     }
 
-    /*@OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order")
     public Set<CaptchaSample> getCaptchaSamples() {
         return this.captchaSamples;
     }
@@ -36,7 +36,7 @@ public class ServerOrder implements ICaptchalizeEntity {
     public void setCaptchaSamples(final Set<CaptchaSample> captchaSamples) {
         this.captchaSamples = captchaSamples;
         this.progressComplete = captchaSamples.size();
-    }*/
+    }
 
     public int getProgressReady() {
         return this.progressReady;
