@@ -30,7 +30,7 @@ public class FunctionPipeline {
         }
     }
 
-    public boolean register(String name, ISlotFunction function) {
+    public boolean register(String name, ISlotFunction function) throws IllegalRegisterException {
         if (!this.buildMode) {
             throw new IllegalRegisterException("Register usable only at build mode.");
         }
@@ -54,7 +54,7 @@ public class FunctionPipeline {
         return true;
     }
 
-    public boolean unregister(String name) {
+    public boolean unregister(String name) throws IllegalRegisterException {
         if (!this.buildMode) {
             throw new IllegalRegisterException("Unregister usable only at build mode.");
         }

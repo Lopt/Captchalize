@@ -14,13 +14,35 @@ public class CaptchaSampleManager extends CaptchalizeEntityManager<CaptchaSample
         super(manager);
     }
 
-    public CaptchaSample create() {
-        CaptchaSample sample = new CaptchaSample();
-
-        this.add(sample);
-
+    public CaptchaSample create(CaptchaImage image) {
+        CaptchaSample sample = this.create();
+        sample.setCaptchaImage(image);
         return sample;
     }
+
+    public CaptchaSample create(CaptchaAudio audio) {
+        CaptchaSample sample = this.create();
+        sample.setCaptchaAudio(audio);
+        return sample;
+    }
+
+    public CaptchaSample create(CaptchaText text) {
+        CaptchaSample sample = this.create();
+        sample.setCaptchaText(text);
+        return sample;
+    }
+
+    public CaptchaSample create(CaptchaImage image, ServerOrder order) {
+        CaptchaSample sample = this.create();
+        sample.setCaptchaImage(image);
+        sample.setServerOrder(order);
+        return sample;
+    }
+
+    private CaptchaSystem captchaSystem = null;
+    private ServerOrder serverOrder = null;
+    private CaptchaAddress captchaAddress = null;
+
 
     @Override
     public CaptchaSample find(final Object primaryKey) {
@@ -40,5 +62,11 @@ public class CaptchaSampleManager extends CaptchalizeEntityManager<CaptchaSample
     @Override
     public long getCount(final Predicate whereClause) {
         return super.getCount(CaptchaSample.class, whereClause);
+    }
+
+    private CaptchaSample create() {
+        CaptchaSample sample = new CaptchaSample();
+        this.add(sample);
+        return sample;
     }
 }

@@ -24,27 +24,40 @@ public class CaptchalizeRunner implements Runnable {
 
     @Override
     public void run() {
-        while (!exit) {
-            this.processNextCaptchaSample();
-
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException exception) {
-                this.exit = true;
+        while (!this.exit) {
+            if (this.hasNextCaptchaSample()) {
+                this.processNextCaptchaSample();
+            } else {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException exception) {
+                    this.exit = true;
+                }
             }
         }
     }
 
-    private void processNextCaptchaSample() {
-        CaptchaSample sample = this.captchaSampleQueue.poll();
-        this.processCaptchaSample(sample);
-
-        ServerOrder serverOrder = sample.getModel().getServerOrder();
-        serverOrder.toProgress();
+    private boolean hasNextCaptchaSample() {
+        return !this.captchaSampleQueue.isEmpty();
     }
 
-    private void processCaptchaSample(CaptchaSample sample) {
-        System.out.println(sample.toString()); // TODO
+    private void processNextCaptchaSample() {
+        CaptchaSample sample = this.captchaSampleQueue.poll();
+
+        if (this.processCaptchaSample(sample)) {
+            ServerOrder serverOrder = sample.getModel().getServerOrder();
+            serverOrder.toProgress();
+        }
+    }
+
+    private boolean processCaptchaSample(CaptchaSample sample) {
+        try {
+            System.out.println(sample.toString()); // TODO
+        } catch (ProcessException exception) {
+            return false;
+        }
+
+        return true;
     }
 
     private CaptchalizeRunner() {

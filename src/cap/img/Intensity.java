@@ -2,8 +2,6 @@ package cap.img;
 
 import java.util.ArrayList;
 
-import javax.swing.text.DefaultEditorKit;
-
 import ij.ImagePlus;
 import ij.plugin.ChannelSplitter;
 import ij.plugin.ChannelArranger;

@@ -21,9 +21,9 @@ public class CaptchaSample implements ICaptchalizeEntity {
     @JoinColumn(name = "captchaSystemId")
     private CaptchaSystem captchaSystem = null;
 
-    //@ManyToOne
-    //@JoinColumn(name = "serverOrderId")
-    //private ServerOrder serverOrder = null;
+    @ManyToOne
+    @JoinColumn(name = "serverOrderId")
+    private ServerOrder serverOrder = null;
 
     @ManyToOne
     @JoinColumn(name = "captchaAddressId")
@@ -63,14 +63,13 @@ public class CaptchaSample implements ICaptchalizeEntity {
         return this.captchaAddress;
     }
 
-    /* TODO
     public ServerOrder getServerOrder() {
         return this.serverOrder;
     }
 
     public void setServerOrder(final ServerOrder serverOrder) {
         this.serverOrder = serverOrder;
-    }*/
+    }
 
     public void setCaptchaAddress(final CaptchaAddress captchaAddress) {
         this.captchaAddress = captchaAddress;

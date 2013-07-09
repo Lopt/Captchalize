@@ -1,13 +1,8 @@
 package cap.db;
 
+import cap.CaptchalizeException;
+
 /**
  * Authors: Bernd Schmidt, Robert Könitz
  */
-public class DriverNotFoundException extends Exception {
-
-    public DriverNotFoundException() {}
-
-    public DriverNotFoundException(String message) {
-        super(message);
-    }
-}
+public class DriverNotFoundException extends CaptchalizeException {}

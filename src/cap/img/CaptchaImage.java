@@ -8,6 +8,7 @@ import ij.process.ImageProcessor;
 import ij.process.ShortProcessor;
 
 import java.awt.Point;
+import java.io.File;
 import java.nio.ByteBuffer;
 
 public class CaptchaImage {
@@ -27,9 +28,9 @@ public class CaptchaImage {
         this.image = this.fromByteArray(imageData);
     }
 
-    public CaptchaImage(String path) {
+    public CaptchaImage(File path) {
         this.position = new Point(0, 0);
-        this.image = opener.openImage(path);
+        this.image = new ImagePlus(path.getName());
     }
 
     public Point getPosition() {
@@ -40,7 +41,6 @@ public class CaptchaImage {
         return this.image;
     }
 
-    // nur für Java 32-bit
     public byte[] toByteArray() {
         ImagePlus image = this.image;
         ImageProcessor processor = image.getProcessor();
@@ -130,7 +130,6 @@ public class CaptchaImage {
         return new ImagePlus("Unnamed", processor);
     }
 
-    private static Opener opener = new Opener();
     private Point position;
     private ImagePlus image;
 
