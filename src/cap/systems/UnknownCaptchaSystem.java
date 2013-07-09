@@ -40,14 +40,14 @@ public class UnknownCaptchaSystem implements ICaptchaSystem {
         return system;
     }
 
-    public static ICaptchaSystem findSystem(CaptchaImage captchaImage) {
+    public static <T extends ICaptchaSystem> T findSystem(CaptchaImage captchaImage) {
         Collection<CaptchaSystem> captchaSystems = Managers.captchaSystemManager.findAll();
 
-        ICaptchaSystem system = null;
+        T system = null;
         float highestMatch = 0;
         for (CaptchaSystem systemData : captchaSystems) {
             try {
-                ICaptchaSystem newSystem = (ICaptchaSystem) Class.forName("cap.systems." + systemData.getName()).newInstance();
+                T newSystem = (T) Class.forName("cap.systems." + systemData.getName()).newInstance();
                 float match = newSystem.isCaptcha(captchaImage);
                 if (system == null || match >= highestMatch) {
                     highestMatch = match;
