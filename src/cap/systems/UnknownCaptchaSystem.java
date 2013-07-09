@@ -46,18 +46,15 @@ public class UnknownCaptchaSystem implements ICaptchaSystem {
         T system = null;
         float highestMatch = 0;
         for (CaptchaSystem systemData : captchaSystems) {
-            try {
-                T newSystem = (T) Class.forName("cap.systems." + systemData.getName()).newInstance();
-                float match = newSystem.isCaptcha(captchaImage);
-                if (system == null || match >= highestMatch) {
-                    highestMatch = match;
-                    system = newSystem;
-                }
-
-            } catch (ClassNotFoundException exception) {
-            } catch (IllegalAccessException exception) {
-            } catch (InstantiationException exception) {
+            T newSystem = findSystem(systemData.getName());
+            float match = newSystem.isCaptcha(captchaImage);
+            if (system == null || match >= highestMatch) {
+                highestMatch = match;
+                system = newSystem;
             }
+        }
+        if (system == null) {
+            system = UnknownCaptchaSystem.findSystem("Unknown");
         }
         return system;
     }
