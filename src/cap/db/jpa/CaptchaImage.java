@@ -21,8 +21,7 @@ public class CaptchaImage implements ICaptchalizeEntity {
     @Lob
     private byte[] destinationImageData = null;
 
-    public CaptchaImage() {
-    }
+    public CaptchaImage() {}
 
     @Override
     public long getId() {

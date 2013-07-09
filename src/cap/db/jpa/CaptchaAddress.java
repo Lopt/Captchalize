@@ -34,8 +34,7 @@ public class CaptchaAddress implements ICaptchalizeEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date = null;
 
-    public CaptchaAddress() {
-    }
+    public CaptchaAddress() {}
 
     @Override
     public long getId() {

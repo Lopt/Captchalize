@@ -3,6 +3,7 @@ package cap.db.jpa;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
@@ -20,7 +21,7 @@ public class Website implements ICaptchalizeEntity {
     private String hostname = "";
 
     @OneToMany
-    private Collection<CaptchaSystem> captchaSystems = new ArrayList<CaptchaSystem>();
+    private Collection<CaptchaSystem> captchaSystems;
 
     public Website() {
     }

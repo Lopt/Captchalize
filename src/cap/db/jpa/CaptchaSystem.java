@@ -15,8 +15,7 @@ public class CaptchaSystem implements ICaptchalizeEntity {
     private long   id   = 0;
     private String name = "";
 
-    public CaptchaSystem() {
-    }
+    public CaptchaSystem() {}
 
     @Override
     public long getId() {

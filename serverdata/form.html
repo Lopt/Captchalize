@@ -3,6 +3,8 @@
 <html>
 <head>
     <title>Captchalize Formulars</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
     <style type="text/css">
         body {
             width: 100%;
@@ -12,7 +14,7 @@
         }
     
         .box_container {
-            max-width: 60%;
+            max-width: 640px;
             text-align: center;
             
 	        margin: auto;
@@ -111,7 +113,7 @@
 
             for (var i = 0; i < images.files.length; i++) {
                 var li = document.createElement("li");
-                li.innerHTML = "File " + (i + 1) + ":&nbsp;&nbsp;&nbsp;" + images.files[i].name;
+                li.innerHTML = images.files[i].name;
                 list.appendChild(li);
             }
         }

@@ -9,7 +9,8 @@ public class CaptchaSample {
 	public CaptchaSample(ICaptchaSystem system) {
 		this.system = system;
 	}
-
+	
+	
 	public IResult getResult() {
 		return null;
 	}

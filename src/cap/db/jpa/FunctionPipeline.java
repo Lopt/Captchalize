@@ -24,7 +24,7 @@ public class FunctionPipeline implements ICaptchalizeEntity{
     private String name = "";
 
     @OneToMany
-    private Collection<Slot> slots = new ArrayList<Slot>();
+    private Collection<Slot> slots;
 
     @ManyToMany
     @JoinTable(

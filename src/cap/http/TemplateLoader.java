@@ -61,6 +61,7 @@ public class TemplateLoader {
         OutputStream os = null;
         try {
             byte[] response = TemplateLoader.loadFile(new File(serverDataDirectory, filename));
+            httpExchange.getResponseHeaders().add("Content-type", "text/html");
             httpExchange.sendResponseHeaders(200, response.length);
             os = httpExchange.getResponseBody();
             os.write(response);
