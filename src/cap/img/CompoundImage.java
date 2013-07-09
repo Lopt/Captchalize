@@ -8,6 +8,10 @@ public class CompoundImage {
     public CompoundImage() {
     }
 
+    public CompoundImage(CaptchaImage captchaImage) {
+        this.appendImage(captchaImage);
+    }
+
     public CaptchaImage getImage() {
 		return this.getImage(0);
 	}
