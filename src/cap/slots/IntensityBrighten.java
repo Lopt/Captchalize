@@ -1,6 +1,7 @@
 package cap.slots;
 
 import cap.ISlotFunction;
+import cap.ProcessException;
 import cap.ResultPart;
 import cap.SlotFunction;
 import cap.img.CompoundImage;
@@ -17,7 +18,7 @@ public class IntensityBrighten extends SlotFunction<CompoundImage, CompoundImage
     }
 
     @Override
-    public ResultPart<CompoundImage> execute(CompoundImage image) {
+    public ResultPart<CompoundImage> execute(CompoundImage image) throws ProcessException {
         cap.db.jpa.slots.IntensityBrighten data = this.getModel().getFunctionData();
 
         int value = data.getValue();

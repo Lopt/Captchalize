@@ -2,6 +2,7 @@ package cap.systems;
 
 import cap.CaptchaSample;
 import cap.ICaptchaSystem;
+import cap.PipelineCreator;
 import cap.db.jpa.CaptchaSystem;
 import cap.img.CaptchaImage;
 
@@ -38,5 +39,10 @@ public class ReCAPTCHA implements ICaptchaSystem {
     @Override
     public float isCaptcha(final CaptchaImage image) {
         return 1;
+    }
+
+    @Override
+    public void createPipelines() {
+        PipelineCreator.reCaptcha(this.model);
     }
 }

@@ -49,5 +49,5 @@ public abstract class SlotFunction<Input, Output> implements ISlotFunction<Input
     }
 
     @Override
-    public abstract ResultPart<Output> execute(final Input data);
+    public abstract ResultPart<Output> execute(final Input data) throws ProcessException;
 }

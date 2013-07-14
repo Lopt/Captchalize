@@ -16,5 +16,5 @@ public interface ISlotFunction<Input, Output> {
     public boolean create(String name);
     public boolean create(Slot slot);
 
-    public ResultPart<Output> execute(Input data);
+    public ResultPart<Output> execute(Input data) throws ProcessException ;
 }

@@ -1,6 +1,7 @@
 package cap.slots;
 
 import cap.ISlotFunction;
+import cap.ProcessException;
 import cap.ResultPart;
 import cap.SlotFunction;
 import cap.img.CompoundImage;
@@ -18,7 +19,7 @@ public class OCRTesseract extends SlotFunction<CompoundImage, String> implements
     }
 
     @Override
-    public ResultPart<String> execute(CompoundImage image) {
+    public ResultPart<String> execute(CompoundImage image) throws ProcessException {
         //cap.db.jpa.slots.MorphErode data = this.getModel().getFunctionData();
 
         return new ResultPart<String>(OCR.tesseract(image));

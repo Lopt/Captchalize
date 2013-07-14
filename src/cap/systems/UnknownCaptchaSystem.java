@@ -102,5 +102,8 @@ public class UnknownCaptchaSystem implements ICaptchaSystem {
     public float isCaptcha(final CaptchaImage image) {
         return 0;
     }
+
+    @Override
+    public void createPipelines() {}
 }
 

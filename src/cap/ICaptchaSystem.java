@@ -11,4 +11,6 @@ public interface ICaptchaSystem {
 
     public float isCaptcha(CaptchaImage image);
     public CaptchaSample createCaptcha(CaptchaImage image);
+
+    public void createPipelines();
 }

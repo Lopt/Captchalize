@@ -1,6 +1,7 @@
 package cap.slots;
 
 import cap.ISlotFunction;
+import cap.ProcessException;
 import cap.ResultPart;
 import cap.SlotFunction;
 import cap.img.Blur;
@@ -17,7 +18,7 @@ public class BlurMedian extends SlotFunction<CompoundImage, CompoundImage> imple
     }
 
     @Override
-    public ResultPart<CompoundImage> execute(CompoundImage image) {
+    public ResultPart<CompoundImage> execute(CompoundImage image) throws ProcessException {
         //cap.db.jpa.slots.BlurMedian data = this.getModel().getFunctionData();
 
         return new ResultPart<CompoundImage>( Blur.median(image) );

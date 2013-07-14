@@ -7,7 +7,7 @@ import net.sourceforge.tess4j.TesseractException;
 
 public class OCR {
 
-    public static String tesseract(final CompoundImage compoundImage) {
+    public static String tesseract(final CompoundImage compoundImage) throws ProcessException {
         CompoundImage newCompoundImage = compoundImage.clone();
         Tesseract instance = Tesseract.getInstance();
 
@@ -18,27 +18,30 @@ public class OCR {
                 result = result.concat(imageText);
             }
             catch (TesseractException err) {
-
+                throw new ProcessException(err.getMessage());
             }
+        }
+        if (result.isEmpty()) {
+            throw new ProcessException("OCR detected no text");
         }
         return result;
     }
 
-    public static String asAlphanumeric(final String text) throws ProcessException {
+    public static String isAlphanumeric(final String text) throws ProcessException {
         if (text.matches("[A-Za-z0-9]+")) {
             throw new ProcessException("is not alphanumeric");
         }
         return text;
     }
 
-    public static String asNumeric(final String text) throws ProcessException {
+    public static String isNumeric(final String text) throws ProcessException {
         if (text.matches("[0-9]+")) {
             throw new ProcessException("is not numeric");
         }
         return text;
     }
 
-    public static String asAlphabetic(final String text) throws ProcessException {
+    public static String isAlphabetic(final String text) throws ProcessException {
         if (text.matches("[A-Za-z]+")) {
             throw new ProcessException("is not alphabetic");
         }

@@ -1,6 +1,7 @@
 package cap.slots;
 
 import cap.ISlotFunction;
+import cap.ProcessException;
 import cap.ResultPart;
 import cap.SlotFunction;
 import cap.img.CompoundImage;
@@ -17,7 +18,7 @@ public class MorphDilate extends SlotFunction<CompoundImage, CompoundImage> impl
     }
 
     @Override
-    public ResultPart<CompoundImage> execute(CompoundImage image) {
+    public ResultPart<CompoundImage> execute(CompoundImage image) throws ProcessException {
         //cap.db.jpa.slots.MorphDilate data = this.getModel().getFunctionData();
 
         return new ResultPart<CompoundImage>(Morph.dilate(image));
