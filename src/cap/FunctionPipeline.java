@@ -15,11 +15,11 @@ public class FunctionPipeline {
     private boolean buildMode = false;
     private Iterator<Slot> currentSlot = null;
 
-    public FunctionPipeline(String name) {
+    public FunctionPipeline(String name) throws ProcessException {
         this(name, false);
     }
 
-    public FunctionPipeline(String name, boolean buildMode) {
+    public FunctionPipeline(String name, boolean buildMode) throws ProcessException {
         this.name = name;
         this.buildMode = buildMode;
 
@@ -27,6 +27,10 @@ public class FunctionPipeline {
             this.model = Managers.functionPipelineManager.getOrCreate(name);
         } else {
             this.model = Managers.functionPipelineManager.get(name);
+        }
+
+        if (this.model == null) {
+            throw new ProcessException();
         }
     }
 
@@ -76,6 +80,8 @@ public class FunctionPipeline {
     }
 
     public <Input, Output> ISlotFunction<Input, Output> next() {
+        assert this.model != null;
+
         if (currentSlot == null) {
             this.currentSlot = this.model.getSlots().iterator();
         }

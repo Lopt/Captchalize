@@ -1,8 +1,11 @@
 package cap.db.jpa;
 
+import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * Authors: Bernd Schmidt, Robert Könitz
@@ -16,6 +19,9 @@ public class CaptchaText implements ICaptchalizeEntity {
 
     private String type  = "";
     private String value = "";
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "captchaText")
+    private Set<CaptchaSample> captchaSamples;
 
     public CaptchaText() {
     }

@@ -1,5 +1,6 @@
 package cap;
 
+import java.io.File;
 import java.net.URL;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -64,7 +65,7 @@ public class RunArguments {
         this.images = new LinkedList();
 
         for (String path : imagePaths) {
-            this.images.add(new CaptchaImage(path));
+            this.images.add(new CaptchaImage(new File(path)));
         }
     }
 

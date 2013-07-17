@@ -13,11 +13,20 @@
         <class>cap.db.jpa.CaptchaSample</class>
         <class>cap.db.jpa.CaptchaSystem</class>
         <class>cap.db.jpa.CaptchaText</class>
+        <class>cap.db.jpa.FunctionPipeline</class>
+        <class>cap.db.jpa.ServerOrder</class>
         <class>cap.db.jpa.Slot</class>
         <class>cap.db.jpa.Website</class>
 
         <!-- SlotFunctionData -->
         <class>cap.db.jpa.slots.BlurGaussian</class>
+        <class>cap.db.jpa.slots.BlurMedian</class>
+        <class>cap.db.jpa.slots.IntensityBrighten</class>
+        <class>cap.db.jpa.slots.IntensityRemove</class>
+        <class>cap.db.jpa.slots.IntensityShade</class>
+        <class>cap.db.jpa.slots.MorphDilate</class>
+        <class>cap.db.jpa.slots.MorphErode</class>
+        <class>cap.db.jpa.slots.OCRTesseract</class>
 
     </persistence-unit>
 	

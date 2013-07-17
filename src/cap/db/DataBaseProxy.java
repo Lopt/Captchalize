@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
+import cap.RunArguments;
+
 /**
  * Authors: Bernd Schmidt, Robert Könitz
  */
@@ -167,8 +169,15 @@ public class DataBaseProxy implements IDataBaseProxy {
     public Properties getHibernateConfig() {
         Properties props = new Properties();
 
-        props.setProperty("hibernate.show_sql", "true");
-        props.setProperty("hibernate.format_sql", "true");
+        RunArguments args = RunArguments.getInstance();
+
+        if (args.isDebugMode()) {
+            props.setProperty("hibernate.show_sql", "true");
+            props.setProperty("hibernate.format_sql", "true");
+        } else {
+            props.setProperty("hibernate.show_sql", "false");
+            props.setProperty("hibernate.format_sql", "false");
+        }
 
         props.setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
         props.setProperty("hibernate.hbm2ddl.auto", "update");

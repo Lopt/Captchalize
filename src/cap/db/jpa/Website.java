@@ -2,9 +2,12 @@ package cap.db.jpa;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.OneToMany;
@@ -20,11 +23,10 @@ public class Website implements ICaptchalizeEntity {
     private long   id       = 0;
     private String hostname = "";
 
-    @OneToMany
-    private Collection<CaptchaSystem> captchaSystems;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "website")
+    private Set<CaptchaSystem> captchaSystems;
 
-    public Website() {
-    }
+    public Website() {}
 
     @Override
     public long getId() {
@@ -39,11 +41,11 @@ public class Website implements ICaptchalizeEntity {
         this.hostname = hostname;
     }
 
-    public Collection<CaptchaSystem> getCaptchaSystems() {
+    public Set<CaptchaSystem> getCaptchaSystems() {
         return this.captchaSystems;
     }
 
-    public void setCaptchaSystems(final Collection<CaptchaSystem> captchaSystems) {
+    public void setCaptchaSystems(final Set<CaptchaSystem> captchaSystems) {
         this.captchaSystems = captchaSystems;
     }
 }

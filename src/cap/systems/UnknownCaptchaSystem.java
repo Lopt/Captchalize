@@ -3,7 +3,9 @@ package cap.systems;
 import java.util.Collection;
 
 import cap.CaptchaSample;
+import cap.FunctionPipeline;
 import cap.ICaptchaSystem;
+import cap.ProcessException;
 import cap.db.jpa.CaptchaSystem;
 import cap.db.jpa.Managers;
 import cap.img.CaptchaImage;
@@ -18,21 +20,23 @@ public class UnknownCaptchaSystem implements ICaptchaSystem {
     public static <T extends ICaptchaSystem> T findSystem(String name) {
         cap.db.jpa.CaptchaSystem systemData = Managers.captchaSystemManager.get(name);
 
+        UnknownCaptchaSystem unknownSystem = new UnknownCaptchaSystem(name);
         if (systemData == null) {
-            UnknownCaptchaSystem unknownSystem = new UnknownCaptchaSystem(name);
             unknownSystem.setModel(Managers.captchaSystemManager.create(name));
             return (T)unknownSystem;
+        } else {
+            unknownSystem.setModel(systemData);
         }
 
         T system = null;
         try {
             system = (T)Class.forName("cap.systems." + systemData.getName()).newInstance();
         } catch (ClassNotFoundException exception) {
-            return null;
+            return (T)unknownSystem;
         } catch (IllegalAccessException exception) {
-            return null;
+            return (T)unknownSystem;
         } catch (InstantiationException exception) {
-            return null;
+            return (T)unknownSystem;
         }
 
         system.setModel(systemData);
@@ -59,9 +63,7 @@ public class UnknownCaptchaSystem implements ICaptchaSystem {
         return system;
     }
 
-    public UnknownCaptchaSystem() {
-        this.name = "default";
-    }
+    public UnknownCaptchaSystem() {}
 
     public UnknownCaptchaSystem(final String name) {
         this.name = name;
@@ -91,16 +93,13 @@ public class UnknownCaptchaSystem implements ICaptchaSystem {
     }
 
     @Override
-    public CaptchaSample createCaptcha(final CaptchaImage image) {
-        CaptchaSample sample = new CaptchaSample(this);
-        //sample.setImage(image);
-
-        return sample;
+    public float isCaptcha(final CaptchaImage image) {
+        return 0;
     }
 
     @Override
-    public float isCaptcha(final CaptchaImage image) {
-        return 0;
+    public FunctionPipeline getFunctionPipeline(final CaptchaSample sample) throws ProcessException {
+        return null;
     }
 
     @Override

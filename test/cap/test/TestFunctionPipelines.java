@@ -8,6 +8,7 @@ import javax.persistence.PersistenceUnit;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import cap.ProcessException;
 import cap.img.CompoundImage;
 import cap.slots.BlurGaussian;
 import org.junit.After;
@@ -56,7 +57,7 @@ public class TestFunctionPipelines {
     }
 
     @Test
-    public void createFunctionPipeline() {
+    public void createFunctionPipeline() throws Exception {
         long countBefore = Managers.slotManager.getCount();
 
         this.em.getTransaction().begin();

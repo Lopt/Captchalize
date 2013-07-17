@@ -32,8 +32,8 @@ public class ReCAPTCHA implements ICaptchaSystem {
     }
 
     @Override
-    public CaptchaSample createCaptcha(final CaptchaImage image) {
-        return null;
+    public float isCaptcha(final CaptchaImage image) {
+        return 1;
     }
 
     @Override

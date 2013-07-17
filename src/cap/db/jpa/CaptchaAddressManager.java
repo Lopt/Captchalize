@@ -24,6 +24,7 @@ public class CaptchaAddressManager extends CaptchalizeEntityManager<CaptchaAddre
     }
 
     public CaptchaAddress create(final URL url) {
+        assert url != null;
 
         CaptchaAddress address = new CaptchaAddress();
 

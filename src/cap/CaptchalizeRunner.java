@@ -52,7 +52,16 @@ public class CaptchalizeRunner implements Runnable {
 
     private boolean processCaptchaSample(CaptchaSample sample) {
         try {
-            System.out.println(sample.toString()); // TODO
+            FunctionPipeline pipeline = sample.getFunctionPipeline();
+
+            ISlotFunction<Object, Object> function = pipeline.next();
+            ResultPart output = function.execute(sample.getInitializeImage());
+
+            while (pipeline.hasNext()) {
+                sample.addResultPart(output);
+                function = pipeline.next();
+                output = function.execute(output);
+            }
         } catch (ProcessException exception) {
             return false;
         }

@@ -2,8 +2,10 @@ package cap.db.jpa;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -23,8 +25,8 @@ public class FunctionPipeline implements ICaptchalizeEntity{
 
     private String name = "";
 
-    @OneToMany
-    private Collection<Slot> slots;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "functionPipeline")
+    private Set<Slot> slots;
 
     @ManyToMany
     @JoinTable(
@@ -46,11 +48,11 @@ public class FunctionPipeline implements ICaptchalizeEntity{
         this.name = name;
     }
 
-    public Collection<Slot> getSlots() {
+    public Set<Slot> getSlots() {
         return this.slots;
     }
 
-    public void setSlots(final Collection<Slot> slots) {
+    public void setSlots(final Set<Slot> slots) {
         this.slots = slots;
     }
 
