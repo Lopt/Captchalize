@@ -3,10 +3,14 @@ package cap.systems;
 import cap.CaptchaSample;
 import cap.FunctionPipeline;
 import cap.ICaptchaSystem;
-import cap.PipelineCreator;
+import cap.IllegalRegisterException;
 import cap.ProcessException;
+import cap.RunArguments;
 import cap.db.jpa.CaptchaSystem;
 import cap.img.CaptchaImage;
+import cap.slots.IntensityRemove;
+import cap.slots.MorphDilate;
+import cap.slots.OCRTesseract;
 
 /**
  * Authors: Bernd Schmidt, Robert Könitz
@@ -45,6 +49,24 @@ public class PHPBB implements ICaptchaSystem {
 
     @Override
     public void createPipelines() {
-        PipelineCreator.phpbb(this.model);
+        try {
+            FunctionPipeline pipeline = new FunctionPipeline("phpbb greyscale", true);
+            IntensityRemove firstFunction = new IntensityRemove();
+            cap.db.jpa.slots.IntensityRemove data = firstFunction.getModel().getFunctionData();
+            data.setBeginInterval(100);
+
+            pipeline.register("delete grey", firstFunction);
+            pipeline.register("dilate", new MorphDilate());
+            pipeline.register("ocr", new OCRTesseract());
+
+        } catch (ProcessException exception) {
+            if (RunArguments.getInstance().isDebugMode()) {
+                exception.printStackTrace();
+            }
+        } catch (IllegalRegisterException exception) {
+            if (RunArguments.getInstance().isDebugMode()) {
+                exception.printStackTrace();
+            }
+        }
     }
 }
