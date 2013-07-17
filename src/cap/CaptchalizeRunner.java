@@ -10,8 +10,9 @@ import cap.db.jpa.ServerOrder;
 public class CaptchalizeRunner implements Runnable {
     private static CaptchalizeRunner instance = new CaptchalizeRunner();
 
-    Thread mainThread = null;
-    boolean exit = false;
+    private Thread mainThread = null;
+    private boolean exit = false;
+    private boolean endless = false;
     private ConcurrentLinkedQueue<CaptchaSample> captchaSampleQueue = null;
 
     public static CaptchalizeRunner getInstance() {
@@ -22,11 +23,24 @@ public class CaptchalizeRunner implements Runnable {
         this.captchaSampleQueue.add(sample);
     }
 
+    public boolean isEndless() {
+        return this.endless;
+    }
+
+    public void setEndless(final boolean endless) {
+        this.endless = endless;
+    }
+
     @Override
     public void run() {
         while (!this.exit) {
+
             if (this.hasNextCaptchaSample()) {
                 this.processNextCaptchaSample();
+
+            } else if (!this.endless) {
+                this.exit = true;
+
             } else {
                 try {
                     Thread.sleep(500);
@@ -34,6 +48,28 @@ public class CaptchalizeRunner implements Runnable {
                     this.exit = true;
                 }
             }
+        }
+    }
+
+    public void start() {
+        this.mainThread.start();
+        this.run();
+    }
+
+    synchronized
+    public void stop() {
+        this.exit = true;
+    }
+
+    public void join() {
+        if (this.exit) {
+            return;
+        }
+
+        try {
+            this.mainThread.join();
+        } catch (InterruptedException exception) {
+            this.exit = true;
         }
     }
 
@@ -66,7 +102,7 @@ public class CaptchalizeRunner implements Runnable {
             if (RunArguments.getInstance().isDebugMode()) {
                 exception.printStackTrace();
             }
-            
+
             return false;
         }
 
@@ -75,8 +111,6 @@ public class CaptchalizeRunner implements Runnable {
 
     private CaptchalizeRunner() {
         this.captchaSampleQueue = new ConcurrentLinkedQueue<CaptchaSample>();
-
-        mainThread = new Thread(this, "Captchalize Runner");
-        mainThread.start();
+        this.mainThread = new Thread(this, "Captchalize Runner");
     }
 }
