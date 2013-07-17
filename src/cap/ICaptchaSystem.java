@@ -13,4 +13,5 @@ public interface ICaptchaSystem {
     public CaptchaSample createCaptcha(CaptchaImage image);
 
     public void createPipelines();
+    public FunctionPipeline getFunctionPipeline(CaptchaSample sample);
 }
