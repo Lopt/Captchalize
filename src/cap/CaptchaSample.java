@@ -50,8 +50,22 @@ public class CaptchaSample {
         return this.system;
     }
 
-    public FunctionPipeline getFunctionPipeline() throws ProcessException {
-        return system.getFunctionPipeline(this);
+    public FunctionPipeline getFunctionPipeline() {
+        try {
+            return system.getFunctionPipeline(this);
+
+        } catch (ProcessException exception) {
+            system.createPipelines();
+            try {
+                return system.getFunctionPipeline(this);
+            } catch (ProcessException ex) {
+                if (RunArguments.getInstance().isDebugMode()) {
+                    ex.printStackTrace();
+                }
+
+                return null;
+            }
+        }
     }
 
     public ArrayList<ResultPart> getResultParts() {

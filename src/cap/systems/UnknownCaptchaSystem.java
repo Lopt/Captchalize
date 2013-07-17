@@ -5,10 +5,15 @@ import java.util.Collection;
 import cap.CaptchaSample;
 import cap.FunctionPipeline;
 import cap.ICaptchaSystem;
+import cap.IllegalRegisterException;
 import cap.ProcessException;
+import cap.RunArguments;
 import cap.db.jpa.CaptchaSystem;
 import cap.db.jpa.Managers;
 import cap.img.CaptchaImage;
+import cap.slots.BlurGaussian;
+import cap.slots.ConvertToCompoundImage;
+import cap.slots.OCRTesseract;
 
 /**
  * Authors: Bernd Schmidt, Robert Könitz
@@ -99,10 +104,27 @@ public class UnknownCaptchaSystem implements ICaptchaSystem {
 
     @Override
     public FunctionPipeline getFunctionPipeline(final CaptchaSample sample) throws ProcessException {
-        return null;
+        return new FunctionPipeline("Unknown_Default");
     }
 
     @Override
-    public void createPipelines() {}
+    public void createPipelines() {
+        FunctionPipeline defaultPipeline = null;
+
+        try {
+            defaultPipeline = new FunctionPipeline("Unknown_Default", true);
+            defaultPipeline.register("getCompound", new ConvertToCompoundImage());
+            defaultPipeline.register("OCR", new OCRTesseract());
+
+        } catch (ProcessException exception) {
+            if (RunArguments.getInstance().isDebugMode()) {
+                exception.printStackTrace();
+            }
+        } catch (IllegalRegisterException exception) {
+            if (RunArguments.getInstance().isDebugMode()) {
+                exception.printStackTrace();
+            }
+        }
+    }
 }
 

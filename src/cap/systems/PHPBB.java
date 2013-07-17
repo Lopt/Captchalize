@@ -1,6 +1,7 @@
 package cap.systems;
 
 import cap.CaptchaSample;
+import cap.FunctionPipeline;
 import cap.ICaptchaSystem;
 import cap.PipelineCreator;
 import cap.db.jpa.CaptchaSystem;
@@ -39,6 +40,11 @@ public class PHPBB implements ICaptchaSystem {
     @Override
     public float isCaptcha(final CaptchaImage image) {
         return 1;
+    }
+
+    @Override
+    public FunctionPipeline getFunctionPipeline(final CaptchaSample sample) {
+        return new FunctionPipeline("PHPBB_Default");
     }
 
     @Override
