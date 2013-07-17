@@ -5,12 +5,14 @@ import java.util.Collection;
 import cap.CaptchaSample;
 import cap.FunctionPipeline;
 import cap.ICaptchaSystem;
+import cap.ISlotFunction;
 import cap.IllegalRegisterException;
 import cap.ProcessException;
 import cap.RunArguments;
 import cap.db.jpa.CaptchaSystem;
 import cap.db.jpa.Managers;
 import cap.img.CaptchaImage;
+import cap.img.CompoundImage;
 import cap.slots.BlurGaussian;
 import cap.slots.ConvertToCompoundImage;
 import cap.slots.OCRTesseract;
@@ -113,7 +115,11 @@ public class UnknownCaptchaSystem implements ICaptchaSystem {
 
         try {
             defaultPipeline = new FunctionPipeline("Unknown_Default", true);
-            defaultPipeline.register("getCompound", new ConvertToCompoundImage());
+
+            ISlotFunction<CaptchaImage, CompoundImage> getCompound = new ConvertToCompoundImage();
+            getCompound.getModel().setName("Blubb");
+
+            defaultPipeline.register("getCompound", getCompound);
             defaultPipeline.register("OCR", new OCRTesseract());
 
         } catch (ProcessException exception) {
