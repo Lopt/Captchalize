@@ -63,6 +63,10 @@ public class CaptchalizeRunner implements Runnable {
                 output = function.execute(output);
             }
         } catch (ProcessException exception) {
+            if (RunArguments.getInstance().isDebugMode()) {
+                exception.printStackTrace();
+            }
+            
             return false;
         }
 
