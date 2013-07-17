@@ -27,7 +27,7 @@ public class PipelineCreator {
 
     public static void reCaptcha(CaptchaSystem model) {
         try {
-            FunctionPipeline pipeline = new FunctionPipeline("phpbb greyscale", true);
+            FunctionPipeline pipeline = new FunctionPipeline("recaptcha greyscale (test)", true);
 
             pipeline.register("delete grey", new IntensityRemove());
             pipeline.register("dilate", new MorphDilate());
