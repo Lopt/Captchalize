@@ -3,16 +3,26 @@ package cap.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Collections;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceUnit;
 
-import cap.CaptchalizeMain;
 import cap.CommandLineInterpreter;
 import cap.RunArguments;
 import cap.db.DataBaseProxyHSQL;
 import cap.db.jpa.Managers;
+
+import org.apache.log4j.Appender;
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.SimpleLayout;
+
+import org.apache.log4j.xml.XMLLayout;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,8 +1,8 @@
 package cap.db.jpa;
 
-import java.util.Collection;
 import java.util.Set;
-import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -10,6 +10,7 @@ import javax.persistence.OneToMany;
 /**
  * Authors: Bernd Schmidt, Robert Könitz
  */
+@Entity
 public class ServerOrder implements ICaptchalizeEntity {
 
     @Id
@@ -19,6 +20,7 @@ public class ServerOrder implements ICaptchalizeEntity {
     private int progressReady = 0;
     private int progressComplete = 0;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "serverOrder")
     private Set<CaptchaSample> captchaSamples;
 
     public ServerOrder() {}
@@ -28,7 +30,6 @@ public class ServerOrder implements ICaptchalizeEntity {
         return this.id;
     }
 
-    @OneToMany(mappedBy = "order")
     public Set<CaptchaSample> getCaptchaSamples() {
         return this.captchaSamples;
     }

@@ -3,12 +3,15 @@ package cap.db.jpa;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -33,6 +36,9 @@ public class CaptchaAddress implements ICaptchalizeEntity {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date date = null;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "captchaAddress")
+    private Set<CaptchaSample> captchaSamples;
 
     public CaptchaAddress() {}
 
