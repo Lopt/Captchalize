@@ -15,7 +15,8 @@ public class PipelineCreator {
             FunctionPipeline pipeline = new FunctionPipeline("phpbb greyscale", true);
 
             IntensityRemove firstFunction = new IntensityRemove();
-            //firstFunction.setBeginInterval(100);
+            cap.db.jpa.slots.IntensityRemove data = firstFunction.getModel().getFunctionData();
+            data.setBeginInterval(100);
 
             pipeline.register("delete grey", firstFunction);
             pipeline.register("dilate", new MorphDilate());
