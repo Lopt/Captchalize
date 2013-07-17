@@ -4,6 +4,7 @@ import cap.CaptchaSample;
 import cap.FunctionPipeline;
 import cap.ICaptchaSystem;
 import cap.PipelineCreator;
+import cap.ProcessException;
 import cap.db.jpa.CaptchaSystem;
 import cap.img.CaptchaImage;
 
@@ -33,17 +34,12 @@ public class PHPBB implements ICaptchaSystem {
     }
 
     @Override
-    public CaptchaSample createCaptcha(final CaptchaImage image) {
-        return null;
-    }
-
-    @Override
     public float isCaptcha(final CaptchaImage image) {
         return 1;
     }
 
     @Override
-    public FunctionPipeline getFunctionPipeline(final CaptchaSample sample) {
+    public FunctionPipeline getFunctionPipeline(final CaptchaSample sample) throws ProcessException {
         return new FunctionPipeline("PHPBB_Default");
     }
 
