@@ -7,11 +7,6 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
-import cap.gui.DebugGui;
-import cap.http.CaptchalizeHttpServer;
-import cap.img.CaptchaImage;
-import ij.ImagePlus;
-import ij.io.Opener;
 import org.apache.log4j.Appender;
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Level;
@@ -19,9 +14,15 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.SimpleLayout;
 
+import cap.gui.GuiRunner;
+import cap.http.CaptchalizeHttpServer;
+import cap.img.CaptchaImage;
+
 public class CaptchalizeMain {
 
 	public static void main(String[] arguments) {
+        LinkedList<CaptchaSample> samples = new LinkedList<CaptchaSample>();
+
         CommandLineInterpreter interpreter = new CommandLineInterpreter();
         interpreter.run(arguments);
 
@@ -48,21 +49,20 @@ public class CaptchalizeMain {
 
         } else if (!args.getImages().isEmpty()) {
             for (CaptchaImage image : args.getImages()) {
-                runner.addCaptchaSample(new CaptchaSample(image));
+                samples.add(new CaptchaSample(image));
+                runner.addCaptchaSample(samples.getLast());
             }
         }
 
         runner.start();
         runner.join();
 
+        if (args.isServerMode()) {
+            return;
+        }
+
         if (args.isDebugGui()) {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    DebugGui gui = new DebugGui();
-                    gui.setResultData(<<< HIER COLLECTION MIT RESULT PARTS >>>);
-                }
-            });
+            SwingUtilities.invokeLater(new GuiRunner(samples));
         }
 	}
 }

@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="captchalize">
+    <output-path>$PROJECT_DIR$/out/artifacts/captchalize</output-path>
+    <root id="archive" name="captchalize.jar">
+      <element id="module-output" name="captchalize" />
+      <element id="library" level="project" name="extern" />
+    </root>
+  </artifact>
+</component>
