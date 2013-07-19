@@ -62,23 +62,26 @@ public class Intensity {
     }
 
 
-    public static CompoundImage brighten(final CompoundImage compoundImage, int value) {
+    public static CompoundImage brighten(final CompoundImage compoundImage, int add) {
         CompoundImage newCompoundImage = compoundImage.clone();
 
         for (CaptchaImage captchaImage : newCompoundImage.getImages()) {
-            ImagePlus image = captchaImage.getImage();
+            ImagePlus[] images = ChannelSplitter.split(captchaImage.getImage());
 
-            for (int x = 0; x < image.getWidth(); x++) {
-                for (int y = 0; y < image.getHeight(); y++) {
-                    int[] rgb = image.getPixel(x, y);
+            for (ImagePlus image : images) {
+                ImageProcessor imageProcessor = image.getProcessor();
 
-                    rgb[0] = StrictMath.max(0, StrictMath.min(rgb[0] + value, 255));
-                    rgb[1] = StrictMath.max(0, StrictMath.min(rgb[1] + value, 255));
-                    rgb[2] = StrictMath.max(0, StrictMath.min(rgb[2] + value, 255));
+                for (int x = 0; x < image.getWidth(); x++) {
+                    for (int y = 0; y < image.getHeight(); y++) {
+                        int value = imageProcessor.getPixel(x, y);
+
+                        value = StrictMath.max(0, StrictMath.min(value + add, 255));
+                        imageProcessor.set(x, y, value);
+                    }
                 }
             }
         }
-        return compoundImage;
+        return newCompoundImage;
     }
 
     public static CompoundImage shade(final CompoundImage compoundImage, int value) {
