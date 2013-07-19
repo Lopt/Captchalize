@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="DebugGui" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="cap.CaptchalizeMain" />
+    <option name="MAIN_CLASS_NAME" value="cap.test.TestDebugGui" />
     <option name="VM_PARAMETERS" value="-ea -Djna.nosys=true" />
     <option name="PROGRAM_PARAMETERS" value="--debug --debug-gui" />
     <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />

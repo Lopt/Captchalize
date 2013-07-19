@@ -4,6 +4,7 @@ import java.net.InetSocketAddress;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -42,7 +43,7 @@ public class CaptchalizeMain {
     }
 
 	public static void main(String[] arguments) {
-        LinkedList<CaptchaSample> samples = new LinkedList<CaptchaSample>();
+        ConcurrentLinkedQueue<CaptchaSample> samples = new ConcurrentLinkedQueue<CaptchaSample>();
 
         CommandLineInterpreter interpreter = new CommandLineInterpreter();
         if (!interpreter.run(arguments)) {
