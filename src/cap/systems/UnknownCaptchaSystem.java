@@ -1,5 +1,6 @@
 package cap.systems;
 
+import java.net.URL;
 import java.util.Collection;
 
 import cap.CaptchaSample;
@@ -17,6 +18,7 @@ import cap.slots.BlurGaussian;
 import cap.slots.ConvertToCompoundImage;
 import cap.slots.MorphDilate;
 import cap.slots.OCRTesseract;
+import org.jsoup.nodes.Document;
 
 /**
  * Authors: Bernd Schmidt, Robert Könitz
@@ -131,6 +133,11 @@ public class UnknownCaptchaSystem implements ICaptchaSystem {
                 exception.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public URL findCaptcha(final Document doc) {
+        return null;
     }
 }
 

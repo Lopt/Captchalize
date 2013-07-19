@@ -1,5 +1,7 @@
 package cap.systems;
 
+import java.net.URL;
+
 import cap.CaptchaSample;
 import cap.FunctionPipeline;
 import cap.ICaptchaSystem;
@@ -15,6 +17,7 @@ import cap.slots.IntensityRemove;
 import cap.slots.IntensityShade;
 import cap.slots.MorphDilate;
 import cap.slots.OCRTesseract;
+import org.jsoup.nodes.Document;
 
 /**
  * Authors: Bernd Schmidt, Robert Könitz
@@ -111,5 +114,10 @@ public class PHPBB implements ICaptchaSystem {
                 exception.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public URL findCaptcha(final Document doc) {
+        return null;
     }
 }

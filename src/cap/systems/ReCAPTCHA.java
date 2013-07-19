@@ -1,5 +1,11 @@
 package cap.systems;
 
+import java.io.File;
+import java.io.IOError;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import cap.CaptchaSample;
 import cap.FunctionPipeline;
 import cap.ICaptchaSystem;
@@ -12,6 +18,9 @@ import cap.slots.ConvertToCompoundImage;
 import cap.slots.IntensityRemove;
 import cap.slots.MorphDilate;
 import cap.slots.OCRTesseract;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 
 /**
  * Authors: Bernd Schmidt, Robert Könitz
@@ -72,5 +81,30 @@ public class ReCAPTCHA implements ICaptchaSystem {
                 exception.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public URL findCaptcha(final Document doc) {
+        // TODO: finding the correct ID and give it back
+
+        Element noscript = doc.select("noscript").get(0);
+        Element iframe = noscript.select("iframe").get(0);
+
+        try {
+            URL captchaURL = new URL(iframe.attr("src"));
+
+            Document captchaHTML = Jsoup.connect(iframe.attr("src")).get();
+            Element captchaImage = captchaHTML.select("img").get(0);
+            String imageRelativeURL = captchaImage.attr("src");
+
+            URL imageURL = new URL(captchaURL.getProtocol(), captchaURL.getHost(), "/" + imageRelativeURL);
+            return imageURL;
+
+        } catch (MalformedURLException exception) {
+            exception.printStackTrace();
+        } catch (IOException exception) {
+        }
+
+        return null;
     }
 }
