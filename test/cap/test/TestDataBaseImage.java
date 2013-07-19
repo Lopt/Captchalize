@@ -59,7 +59,7 @@ public class TestDataBaseImage {
     public void imageSaveAndLoad() {
         CaptchaImageManager cim = Managers.captchaImageManager;
 
-        CaptchaImage beforeCaptchaImage = new CaptchaImage("testdata/img/closedbook.png");
+        CaptchaImage beforeCaptchaImage = new CaptchaImage("testdata/examples/phpbb_0.php");
         byte[] data = beforeCaptchaImage.toByteArray();
 
         long beforeCount = cim.getCount();

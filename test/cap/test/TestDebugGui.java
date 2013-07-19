@@ -22,12 +22,12 @@ public class TestDebugGui {
 
     public static void main(String[] arguments) {
         Opener opener = new Opener();
-        ImagePlus image1 = opener.openImage("testdata/img/openedbook.png");
-        ImagePlus image2 = opener.openImage("testdata/img/closedbook.png");
-
         LinkedList<ResultPart> parts = new LinkedList<ResultPart>();
-        parts.add(new ResultPart<CompoundImage>(new CompoundImage(new CaptchaImage(image1))));
-        parts.add(new ResultPart<CompoundImage>(new CompoundImage(new CaptchaImage(image2))));
+
+        for (int i = 0; i < 7; i++) {
+            ImagePlus image1 = opener.openImage(String.format("testdata/examples/phpbb_%d.png", i));
+            parts.add(new ResultPart<CompoundImage>(new CompoundImage(new CaptchaImage(image1))));
+        }
 
         SwingUtilities.invokeLater(new GuiRunner(parts));
     }

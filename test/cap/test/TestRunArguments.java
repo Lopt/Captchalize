@@ -73,7 +73,10 @@ public class TestRunArguments {
 
     @Test
     public void parseArguments_2() {
-        this.interpreter.run(new String[]{"testdata/img/openedbook.png", "https://www.google.de/images/srpr/logo4w.png"});
+        this.interpreter.run(new String[] {
+            "testdata/examples/phpbb_0.png",
+            "https://www.google.de/images/srpr/logo4w.png"
+        });
 
         RunArguments args = RunArguments.getInstance();
         assertTrue(args.getImages().size() > 0);
@@ -81,7 +84,7 @@ public class TestRunArguments {
 
     @Test
     public void parseArguments_3() {
-        this.interpreter.run(new String[]{"-y=ReCAPTCHA", "testdata/img/closedbook.png"});
+        this.interpreter.run(new String[] { "-y=ReCAPTCHA", "testdata/img/phpbb_0.png" });
 
         RunArguments args = RunArguments.getInstance();
         assertEquals("ReCAPTCHA", args.getCaptchaSystem());
