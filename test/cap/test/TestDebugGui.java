@@ -7,6 +7,7 @@ import javax.swing.SwingUtilities;
 
 import cap.CaptchaSample;
 import cap.gui.GuiRunner;
+import cap.img.CompoundImage;
 import ij.ImagePlus;
 import ij.io.Opener;
 
@@ -25,8 +26,8 @@ public class TestDebugGui {
         ImagePlus image2 = opener.openImage("testdata/img/closedbook.png");
 
         LinkedList<ResultPart> parts = new LinkedList<ResultPart>();
-        parts.add(new ResultPart<CaptchaImage>(new CaptchaImage(image1)));
-        parts.add(new ResultPart<CaptchaImage>(new CaptchaImage(image2)));
+        parts.add(new ResultPart<CompoundImage>(new CompoundImage(new CaptchaImage(image1))));
+        parts.add(new ResultPart<CompoundImage>(new CompoundImage(new CaptchaImage(image2))));
 
         SwingUtilities.invokeLater(new GuiRunner(parts));
     }

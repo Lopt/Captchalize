@@ -36,6 +36,8 @@ public class ResultPanelCompoundImage extends ResultPanel<CompoundImage> {
 
             this.add(label);
         }
+
+        this.updateUI();
     }
 
     private void init() {
