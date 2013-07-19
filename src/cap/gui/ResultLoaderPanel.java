@@ -9,6 +9,7 @@ import java.util.ListIterator;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import cap.ResultPart;
@@ -31,6 +32,7 @@ public class ResultLoaderPanel extends JPanel implements ActionListener {
     private ResultPanel<CompoundImage> resultPanelCompoundImage = null;
     private ResultPanel<CaptchaImage> resultPanelImage = null;
     private ResultPanel<String> resultPanelString = null;
+    private ResultPanel<String> resultPanelUnknown = null;
     private ResultPanel currentPanel = null;
 
     private CardLayout cardLayout = new CardLayout();
@@ -80,8 +82,10 @@ public class ResultLoaderPanel extends JPanel implements ActionListener {
             this.currentPanel = this.resultPanelCompoundImage;
         } else if (name.equals("cap.img.CaptchaImage")) {
             this.currentPanel = this.resultPanelImage;
-        } else if (name.equals("String")) {
+        } else if (name.equals("java.lang.String")) {
             this.currentPanel = this.resultPanelString;
+        } else {
+            this.currentPanel = this.resultPanelUnknown;
         }
 
         this.setNextButtonState();
@@ -136,11 +140,12 @@ public class ResultLoaderPanel extends JPanel implements ActionListener {
         this.resultPanelCompoundImage = new ResultPanelCompoundImage();
         this.resultPanelImage = new ResultPanelImage();
         this.resultPanelString = new ResultPanelString();
+        this.resultPanelUnknown = new ResultPanelUnknown();
 
         this.content.setLayout(this.cardLayout);
         this.content.add(this.resultPanelCompoundImage, "cap.img.CompoundImage");
         this.content.add(this.resultPanelImage, "cap.img.CaptchaImage");
-        this.content.add(this.resultPanelString, "String");
+        this.content.add(this.resultPanelString, "java.lang.String");
         //content.add(this.resultPanelAudio, "Audio");
         //content.add(this.resultPanelText, "Text");
 

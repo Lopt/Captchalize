@@ -22,6 +22,6 @@ public class OCRTesseract extends SlotFunction<CompoundImage, String> implements
     public ResultPart<String> execute(CompoundImage image) throws ProcessException {
         //cap.db.jpa.slots.MorphErode data = this.getData();
 
-        return new ResultPart<String>("");//new ResultPart<String>(OCR.tesseract(image));
+        return new ResultPart<String>(OCR.tesseract(image));
     }
 }

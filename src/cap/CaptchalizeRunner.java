@@ -106,6 +106,8 @@ public class CaptchalizeRunner implements Runnable {
                     function = pipeline.next();
                     output = function.execute(output.getData());
                 }
+
+                sample.addResultPart(output);
             }
         } catch (ProcessException exception) {
             if (RunArguments.getInstance().isDebugMode()) {

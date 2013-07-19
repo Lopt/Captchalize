@@ -51,7 +51,6 @@ public class CaptchalizeMain {
         }
 
         RunArguments args = RunArguments.getInstance();
-        args.setCaptchaSystem("PHPBB");
 
         IDataBaseProxy proxy = args.getDatabaseProxy();
         try {
