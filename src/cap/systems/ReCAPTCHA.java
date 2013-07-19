@@ -45,7 +45,7 @@ public class ReCAPTCHA implements ICaptchaSystem {
 
     @Override
     public FunctionPipeline getFunctionPipeline(final CaptchaSample sample) throws ProcessException {
-        return new FunctionPipeline("recaptcha default");
+        return new FunctionPipeline("recaptcha greyscale");
     }
 
     @Override

@@ -79,6 +79,9 @@ public class CaptchalizeRunner implements Runnable {
 
     private void processNextCaptchaSample() {
         CaptchaSample sample = this.captchaSampleQueue.poll();
+        if (sample == null) {
+            return;
+        }
 
         assert sample.getModel() != null;
 

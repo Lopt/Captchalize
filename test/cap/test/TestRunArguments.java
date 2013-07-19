@@ -81,10 +81,10 @@ public class TestRunArguments {
 
     @Test
     public void parseArguments_3() {
-        this.interpreter.run(new String[]{"-y=reCAPTCHA", "testdata/img/closedbook.png"});
+        this.interpreter.run(new String[]{"-y=ReCAPTCHA", "testdata/img/closedbook.png"});
 
         RunArguments args = RunArguments.getInstance();
-        assertEquals("reCAPTCHA", args.getCaptchaSystem().getName());
+        assertEquals("ReCAPTCHA", args.getCaptchaSystem());
         assertTrue(args.getImages().size() > 0);
     }
 }

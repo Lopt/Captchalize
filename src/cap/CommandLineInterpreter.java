@@ -130,7 +130,7 @@ public class CommandLineInterpreter {
 
         Option captchaSystem = OptionBuilder
             .withLongOpt("captcha-system")
-            .withDescription("use a specific CAPTCHA system.")
+            .withDescription("use a specific CAPTCHA system. (default UnknownCaptchaSystem)")
             .hasArg()
             .withArgName("system_name")
             .create("sys");
@@ -183,7 +183,7 @@ public class CommandLineInterpreter {
         args.setDebugGui(line.hasOption("debug-gui"));
 
         if (line.hasOption("captcha-system")) {
-            args.setCaptchaSystem(UnknownCaptchaSystem.findSystem(line.getOptionValue("captcha-system")));
+            args.setCaptchaSystem(line.getOptionValue("captcha-system"));
         }
 
         if (line.hasOption("database-type")) {

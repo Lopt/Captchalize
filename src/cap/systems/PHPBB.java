@@ -45,7 +45,7 @@ public class PHPBB implements ICaptchaSystem {
 
     @Override
     public FunctionPipeline getFunctionPipeline(final CaptchaSample sample) throws ProcessException {
-        return new FunctionPipeline("phpbb default");
+        return new FunctionPipeline("phpbb greyscale");
     }
 
     @Override

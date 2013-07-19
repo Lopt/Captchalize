@@ -30,7 +30,7 @@ public class RunArguments {
     private String databaseUser = "";
     private String databasePassword = "";
 
-    private ICaptchaSystem captchaSystem = null;
+    private String captchaSystem = null;
     private LinkedList<CaptchaImage> images = null;
     private URL findOn = null;
 
@@ -38,11 +38,11 @@ public class RunArguments {
         return instance;
     }
 
-    public ICaptchaSystem getCaptchaSystem() {
+    public String getCaptchaSystem() {
         return this.captchaSystem;
     }
 
-    public void setCaptchaSystem(final ICaptchaSystem captchaSystem) {
+    public void setCaptchaSystem(final String captchaSystem) {
         this.captchaSystem = captchaSystem;
     }
 

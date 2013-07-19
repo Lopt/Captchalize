@@ -50,6 +50,7 @@ public class CaptchalizeMain {
         }
 
         RunArguments args = RunArguments.getInstance();
+        args.setCaptchaSystem("PHPBB");
 
         IDataBaseProxy proxy = args.getDatabaseProxy();
         try {
@@ -91,7 +92,7 @@ public class CaptchalizeMain {
         } else if (!args.getImages().isEmpty()) {
             em.getTransaction().begin();
             for (CaptchaImage image : args.getImages()) {
-                samples.add(new CaptchaSample(image));
+                samples.add(new CaptchaSample(image, args.getCaptchaSystem()));
             }
             em.getTransaction().commit();
         }

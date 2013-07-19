@@ -48,7 +48,9 @@ public class ResultLoaderPanel extends JPanel implements ActionListener {
 
         this.results = parts;
         this.current = new StepIterator(this.results.listIterator());
-        this.setResultData(this.current.next());
+        if (this.current.hasNext()) {
+            this.setResultData(this.current.next());
+        }
         this.prevButton.setEnabled(false);
     }
 
