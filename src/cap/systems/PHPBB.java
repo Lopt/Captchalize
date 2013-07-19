@@ -48,7 +48,7 @@ public class PHPBB implements ICaptchaSystem {
 
     @Override
     public FunctionPipeline getFunctionPipeline(final CaptchaSample sample) throws ProcessException {
-        return new FunctionPipeline("phpbb greyscale median");
+        return new FunctionPipeline("phpbb greyscale gaussian3");
     }
 
     @Override
@@ -67,53 +67,36 @@ public class PHPBB implements ICaptchaSystem {
                 pipeline.register("ocr", new OCRTesseract());
             }
             {
-                FunctionPipeline pipeline = new FunctionPipeline("phpbb greyscale median", true);
+                FunctionPipeline pipeline = new FunctionPipeline("phpbb greyscale gaussian3", true);
                 pipeline.register("compound", new ConvertToCompoundImage());
-
-                IntensityRemove firstFunction = new IntensityRemove();
-                pipeline.register("delete11grey", firstFunction);
-                cap.db.jpa.slots.IntensityRemove data = firstFunction.getData();
-                data.setBeginInterval(255);
-
                 {
-                    BlurMedian gaussian = new BlurMedian();
+                    IntensityRemove firstFunction = new IntensityRemove();
+                    pipeline.register("delete grey 1", firstFunction);
+                    cap.db.jpa.slots.IntensityRemove data = firstFunction.getData();
+                    data.setBeginInterval(130);
+                }
+                {
+                    BlurGaussian gaussian = new BlurGaussian();
                     pipeline.register("blur 1", gaussian);
-                    cap.db.jpa.slots.BlurMedian dataBlur = gaussian.getData();
-                    //dataBlur.setSize(1);
+                    cap.db.jpa.slots.BlurGaussian dataBlur = gaussian.getData();
+                    dataBlur.setSize(1);
 
                     IntensityShade shade = new IntensityShade();
                     pipeline.register("shade 1", shade);
                     cap.db.jpa.slots.IntensityShade dataShade = shade.getData();
-                    dataShade.setValue(160);
+                    dataShade.setValue(120);
 
                     IntensityRemove remove = new IntensityRemove();
                     pipeline.register("delete grey 2", remove);
-                    cap.db.jpa.slots.IntensityRemove dataRemove = firstFunction.getData();
-                    dataRemove.setBeginInterval(180);
+                    cap.db.jpa.slots.IntensityRemove dataRemove = remove.getData();
+                    dataRemove.setBeginInterval(80);
                 }
                 {
                     BlurGaussian gaussian = new BlurGaussian();
                     pipeline.register("blur 2", gaussian);
                     cap.db.jpa.slots.BlurGaussian dataBlur = gaussian.getData();
-                    dataBlur.setSize(2);
-
-
-                    IntensityShade shade = new IntensityShade();
-                    pipeline.register("shade 2", shade);
-                    cap.db.jpa.slots.IntensityShade dataShade = shade.getData();
-                    dataShade.setValue(160);
-
-                    IntensityRemove remove = new IntensityRemove();
-                    pipeline.register("delete grey 3", remove);
-                    cap.db.jpa.slots.IntensityRemove dataRemove = firstFunction.getData();
-                    dataRemove.setBeginInterval(180);
-
+                    dataBlur.setSize(1);
                 }
-
-                BlurGaussian gaussian = new BlurGaussian();
-                pipeline.register("blur 2", gaussian);
-                cap.db.jpa.slots.BlurGaussian dataBlur = gaussian.getData();
-                dataBlur.setSize(1);
 
                 pipeline.register("ocr", new OCRTesseract());
             }

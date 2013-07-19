@@ -28,7 +28,7 @@ public class Intensity {
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
 
-                int pixelValue = image.getPixel(x, y)[0];
+                int pixelValue = imageProcessor.getPixel(x, y);
                 boolean inArea = (beginInterval < pixelValue && pixelValue < endInterval);
 
                 int newValue = (inArea) ? standardValue : pixelValue;
