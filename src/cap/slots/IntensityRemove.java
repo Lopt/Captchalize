@@ -19,7 +19,7 @@ public class IntensityRemove extends SlotFunction<CompoundImage, CompoundImage> 
 
     @Override
     public ResultPart<CompoundImage> execute(CompoundImage image) throws ProcessException {
-        cap.db.jpa.slots.IntensityRemove data = this.getModel().getFunctionData();
+        cap.db.jpa.slots.IntensityRemove data = this.getData();
 
         int beginInterval    = data.getBeginInterval();
         int endInterval      = data.getEndInterval();

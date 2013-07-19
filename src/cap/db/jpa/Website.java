@@ -2,6 +2,7 @@ package cap.db.jpa;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -24,7 +25,7 @@ public class Website implements ICaptchalizeEntity {
     private String hostname = "";
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "website")
-    private Set<CaptchaSystem> captchaSystems;
+    private Set<CaptchaSystem> captchaSystems = new HashSet<CaptchaSystem>();
 
     public Website() {}
 

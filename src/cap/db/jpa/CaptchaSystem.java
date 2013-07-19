@@ -1,5 +1,6 @@
 package cap.db.jpa;
 
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -25,7 +26,7 @@ public class CaptchaSystem implements ICaptchalizeEntity {
     private Website website = null;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "captchaSystem")
-    private Set<CaptchaSample> captchaSamples;
+    private Set<CaptchaSample> captchaSamples = new HashSet<CaptchaSample>();
 
     public CaptchaSystem() {}
 

@@ -4,7 +4,6 @@ import cap.ISlotFunction;
 import cap.ProcessException;
 import cap.ResultPart;
 import cap.SlotFunction;
-import cap.img.Blur;
 import cap.img.CaptchaImage;
 import cap.img.CompoundImage;
 import cap.img.Convert;
@@ -21,8 +20,8 @@ public class ConvertToCompoundImage extends SlotFunction<CaptchaImage, CompoundI
 
     @Override
     public ResultPart<CompoundImage> execute(CaptchaImage image) throws ProcessException {
-        //cap.db.jpa.slots.BlurMedian data = this.getModel().getFunctionData();
+        //cap.db.jpa.slots.BlurMedian data = this.getData();
 
-        return new ResultPart<CompoundImage>(Convert.toCompoundImage(image) );
+        return new ResultPart<CompoundImage>(Convert.toCompoundImage(image));
     }
 }

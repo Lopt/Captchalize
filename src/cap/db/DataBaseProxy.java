@@ -166,6 +166,7 @@ public class DataBaseProxy implements IDataBaseProxy {
         return url.toString();
     }
 
+    @Override
     public Properties getHibernateConfig() {
         Properties props = new Properties();
 

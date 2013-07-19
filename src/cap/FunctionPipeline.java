@@ -2,7 +2,6 @@ package cap;
 
 import cap.db.jpa.Managers;
 import cap.db.jpa.Slot;
-import cap.db.jpa.SlotNotFoundException;
 
 import java.util.Iterator;
 
@@ -11,9 +10,10 @@ import java.util.Iterator;
  */
 public class FunctionPipeline {
     private cap.db.jpa.FunctionPipeline model = null;
-    private String name = "";
     private boolean buildMode = false;
     private Iterator<Slot> currentSlot = null;
+    private String name = "";
+    private int currentId = 0;
 
     public FunctionPipeline(String name) throws ProcessException {
         this(name, false);
@@ -53,7 +53,12 @@ public class FunctionPipeline {
             slot.setName(name);
 
             this.model.getSlots().add(slot);
+        } else {
+            function.create(slot);
         }
+
+        slot.setNumber(this.currentId);
+        this.currentId += 1;
 
         return true;
     }
@@ -76,15 +81,16 @@ public class FunctionPipeline {
     }
 
     public boolean hasNext() {
+        if (this.currentSlot == null) {
+            this.currentSlot = this.model.getSlots().iterator();
+        }
+
         return this.currentSlot.hasNext();
     }
 
     public <Input, Output> ISlotFunction<Input, Output> next() {
         assert this.model != null;
-
-        if (currentSlot == null) {
-            this.currentSlot = this.model.getSlots().iterator();
-        }
+        assert this.currentSlot != null : "You have to check hasNext() first.";
 
         Slot slot = this.currentSlot.next();
         SlotFunction<Input, Output> function = null;

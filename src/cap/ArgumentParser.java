@@ -13,10 +13,9 @@ public class ArgumentParser {
 
     private CommandLineParser parser = new GnuParser();
     private Options options = new Options();
-    private String usage = "java -jar captchalize.jar [options] [image1, [image2, [image3] ...]]";
+    private String usage = "java -jar captchalize.jar [options] [image1, [image2, ...]]";
 
-    public ArgumentParser() {
-    }
+    public ArgumentParser() {}
 
     public ArgumentParser(final CommandLineParser parser) {
         assert parser != null;

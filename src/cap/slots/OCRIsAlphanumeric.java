@@ -18,7 +18,7 @@ public class OCRIsAlphanumeric extends SlotFunction<String, String> implements I
 
     @Override
     public ResultPart<String> execute(String text) throws ProcessException {
-        //cap.db.jpa.slots.MorphErode data = this.getModel().getFunctionData();
+        //cap.db.jpa.slots.MorphErode data = this.getData();
 
         return new ResultPart<String>(OCR.isAlphanumeric(text));
     }

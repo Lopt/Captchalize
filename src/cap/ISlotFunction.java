@@ -1,5 +1,6 @@
 package cap;
 
+import cap.db.jpa.ISlotFunctionData;
 import cap.db.jpa.Slot;
 
 /**
@@ -12,6 +13,7 @@ public interface ISlotFunction<Input, Output> {
     public String getName();
 
     public Slot getModel();
+    public <T extends ISlotFunctionData> T getData();
 
     public boolean create(String name);
     public boolean create(Slot slot);

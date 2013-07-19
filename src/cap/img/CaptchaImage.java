@@ -1,7 +1,6 @@
 package cap.img;
 
 import ij.ImagePlus;
-import ij.io.Opener;
 import ij.process.ByteProcessor;
 import ij.process.ColorProcessor;
 import ij.process.ImageProcessor;
@@ -47,6 +46,8 @@ public class CaptchaImage {
     }
 
     public byte[] toByteArray() {
+        assert this.image.getProcessor() != null : "Corrupted image, processor could not be found.";
+
         ImagePlus image = this.image;
         ImageProcessor processor = image.getProcessor();
 

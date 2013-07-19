@@ -63,7 +63,7 @@ public class CaptchaSampleManager extends CaptchalizeEntityManager<CaptchaSample
 
         sample.setCaptchaImage(Managers.captchaImageManager.create(imageData));
         sample.setCaptchaSystem(system);
-        if (address == null) {
+        if (address != null) {
             sample.setCaptchaAddress(Managers.captchaAddressManager.create(address));
         }
 

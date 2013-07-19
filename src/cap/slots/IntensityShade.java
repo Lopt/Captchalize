@@ -19,7 +19,7 @@ public class IntensityShade extends SlotFunction<CompoundImage, CompoundImage> i
 
     @Override
     public ResultPart<CompoundImage> execute(CompoundImage image) throws ProcessException {
-        cap.db.jpa.slots.IntensityShade data = this.getModel().getFunctionData();
+        cap.db.jpa.slots.IntensityShade data = this.getData();
 
         int value = data.getValue();
         return new ResultPart<CompoundImage>(Intensity.shade(image, value));

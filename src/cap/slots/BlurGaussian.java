@@ -20,7 +20,7 @@ public class BlurGaussian extends SlotFunction<CompoundImage, CompoundImage> imp
 
     @Override
     public ResultPart<CompoundImage> execute(CompoundImage image) throws ProcessException {
-        cap.db.jpa.slots.BlurGaussian data = this.getModel().getFunctionData();
+        cap.db.jpa.slots.BlurGaussian data = this.getData();
 
         double size = data.getSize();
         return new ResultPart<CompoundImage>( Blur.gaussian(image, size) );

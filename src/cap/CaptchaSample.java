@@ -7,6 +7,7 @@ import cap.systems.UnknownCaptchaSystem;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class CaptchaSample {
@@ -15,7 +16,7 @@ public class CaptchaSample {
     private CaptchaImage initializeImage = null;
     private ICaptchaSystem system = null;
 
-    private ArrayList<ResultPart> results = new ArrayList<ResultPart>();
+    private LinkedList<ResultPart> results = new LinkedList<ResultPart>();
 
     public CaptchaSample(CaptchaImage initializeImage) {
         this(initializeImage, UnknownCaptchaSystem.findSystem(initializeImage), null);
@@ -30,8 +31,12 @@ public class CaptchaSample {
     }
 
     public CaptchaSample(CaptchaImage initializeImage, ICaptchaSystem system, URL address) {
+        assert initializeImage != null;
+        assert system != null;
+
         this.model = Managers.captchaSampleManager.create(initializeImage.toByteArray(), system.getModel(), address);
         this.initializeImage = initializeImage;
+        this.system = system;
     }
 
     public cap.db.jpa.CaptchaSample getModel() {
@@ -50,25 +55,13 @@ public class CaptchaSample {
         return this.system;
     }
 
-    public FunctionPipeline getFunctionPipeline() {
-        try {
-            return system.getFunctionPipeline(this);
+    public FunctionPipeline getFunctionPipeline() throws ProcessException {
+        assert this.system != null;
 
-        } catch (ProcessException exception) {
-            system.createPipelines();
-            try {
-                return system.getFunctionPipeline(this);
-            } catch (ProcessException ex) {
-                if (RunArguments.getInstance().isDebugMode()) {
-                    ex.printStackTrace();
-                }
-
-                return null;
-            }
-        }
+        return this.system.getFunctionPipeline(this);
     }
 
-    public ArrayList<ResultPart> getResultParts() {
+    public LinkedList<ResultPart> getResultParts() {
         return this.results;
     }
 

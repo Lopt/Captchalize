@@ -19,7 +19,7 @@ public class BlurMedian extends SlotFunction<CompoundImage, CompoundImage> imple
 
     @Override
     public ResultPart<CompoundImage> execute(CompoundImage image) throws ProcessException {
-        //cap.db.jpa.slots.BlurMedian data = this.getModel().getFunctionData();
+        //cap.db.jpa.slots.BlurMedian data = this.getData();
 
         return new ResultPart<CompoundImage>( Blur.median(image) );
     }

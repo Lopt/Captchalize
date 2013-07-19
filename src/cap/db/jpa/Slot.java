@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
  * Authors: Bernd Schmidt, Robert Könitz
  */
 @Entity
-public class Slot implements ICaptchalizeEntity {
+public class Slot implements ICaptchalizeEntity, Comparable<Slot> {
 
     @Id
     @GeneratedValue
@@ -20,6 +20,7 @@ public class Slot implements ICaptchalizeEntity {
     @JoinColumn(name = "functionPipelineId")
     private FunctionPipeline functionPipeline = null;
 
+    private int    number     = 0;
     private String name       = "";
     private String className  = "";
     private long   foreignKey = 0;
@@ -29,6 +30,14 @@ public class Slot implements ICaptchalizeEntity {
     @Override
     public long getId() {
         return this.id;
+    }
+
+    public int getNumber() {
+        return this.number;
+    }
+
+    public void setNumber(final int number) {
+        this.number = number;
     }
 
     public String getName() {
@@ -68,6 +77,18 @@ public class Slot implements ICaptchalizeEntity {
             return Managers.slotManager.getFunctionData(this.className, this.foreignKey);
         } catch (SlotNotFoundException exception) {
             return null;
+        }
+    }
+
+    @Override
+    public int compareTo(final Slot slot) {
+        assert this.getFunctionPipeline() == slot.getFunctionPipeline();
+
+        int number = slot.getNumber();
+        if (this.number == number) {
+            return 0;
+        } else {
+            return this.number < number ? -1 : 1;
         }
     }
 }

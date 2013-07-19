@@ -80,23 +80,29 @@ public class CaptchalizeRunner implements Runnable {
     private void processNextCaptchaSample() {
         CaptchaSample sample = this.captchaSampleQueue.poll();
 
+        assert sample.getModel() != null;
+
         if (this.processCaptchaSample(sample)) {
             ServerOrder serverOrder = sample.getModel().getServerOrder();
-            serverOrder.toProgress();
+            if (serverOrder != null) {
+                serverOrder.toProgress();
+            }
         }
     }
 
     private boolean processCaptchaSample(CaptchaSample sample) {
         try {
             FunctionPipeline pipeline = sample.getFunctionPipeline();
+            if (pipeline.hasNext()) {
 
-            ISlotFunction<Object, Object> function = pipeline.next();
-            ResultPart output = function.execute(sample.getInitializeImage());
+                ISlotFunction<Object, Object> function = pipeline.next();
+                ResultPart output = function.execute(sample.getInitializeImage());
 
-            while (pipeline.hasNext()) {
-                sample.addResultPart(output);
-                function = pipeline.next();
-                output = function.execute(output);
+                while (pipeline.hasNext()) {
+                    sample.addResultPart(output);
+                    function = pipeline.next();
+                    output = function.execute(output.getData());
+                }
             }
         } catch (ProcessException exception) {
             if (RunArguments.getInstance().isDebugMode()) {

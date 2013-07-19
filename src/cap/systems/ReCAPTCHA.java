@@ -8,6 +8,7 @@ import cap.ProcessException;
 import cap.RunArguments;
 import cap.db.jpa.CaptchaSystem;
 import cap.img.CaptchaImage;
+import cap.slots.ConvertToCompoundImage;
 import cap.slots.IntensityRemove;
 import cap.slots.MorphDilate;
 import cap.slots.OCRTesseract;
@@ -44,18 +45,21 @@ public class ReCAPTCHA implements ICaptchaSystem {
 
     @Override
     public FunctionPipeline getFunctionPipeline(final CaptchaSample sample) throws ProcessException {
-        return new FunctionPipeline("ReCaptcha_Default");
+        return new FunctionPipeline("recaptcha default");
     }
 
     @Override
     public void createPipelines() {
         try {
-            FunctionPipeline pipeline = new FunctionPipeline("phpbb greyscale", true);
+            FunctionPipeline pipeline = new FunctionPipeline("recaptcha greyscale", true);
+            pipeline.register("compound", new ConvertToCompoundImage());
+
             IntensityRemove firstFunction = new IntensityRemove();
-            cap.db.jpa.slots.IntensityRemove data = firstFunction.getModel().getFunctionData();
+            pipeline.register("delete grey", firstFunction);
+
+            cap.db.jpa.slots.IntensityRemove data = firstFunction.getData();
             data.setBeginInterval(100);
 
-            pipeline.register("delete grey", firstFunction);
             pipeline.register("dilate", new MorphDilate());
             pipeline.register("ocr", new OCRTesseract());
 

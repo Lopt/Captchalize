@@ -19,7 +19,7 @@ public class IntensityBrighten extends SlotFunction<CompoundImage, CompoundImage
 
     @Override
     public ResultPart<CompoundImage> execute(CompoundImage image) throws ProcessException {
-        cap.db.jpa.slots.IntensityBrighten data = this.getModel().getFunctionData();
+        cap.db.jpa.slots.IntensityBrighten data = this.getData();
 
         int value = data.getValue();
         return new ResultPart<CompoundImage>(Intensity.brighten(image, value));

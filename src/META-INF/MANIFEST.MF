@@ -1,0 +1,70 @@
+Manifest-Version: 1.0
+Class-Path: extern/cglib-2.2.jar extern/antlr-2.7.6.jar extern/hiberna
+ te-jpa-2.0-api-1.0.1.Final.jar extern/ghost4j-0.3.1.jar extern/common
+ s-io-2.4.jar extern/log4j-1.2.9.jar extern/mysql-connector-java-3.0.1
+ 7-ga-bin.jar extern/hsqldb-2.2.8.jar extern/junit-4.11.jar extern/com
+ mons-fileupload-1.3.jar extern/hibernate3.jar extern/jsoup-1.7.2.jar 
+ extern/commons-cli-1.2.jar extern/jai_imageio.jar extern/sqlite-jdbc-
+ 3.7.2.jar extern/jta-1.1.jar extern/hamcrest-core-1.3.jar extern/hsql
+ db.jar extern/libtesseract.so.3.0.2 extern/ij.jar extern/javassist-3.
+ 17.1-GA.jar extern/jna.jar extern/tess4j.jar extern/dom4j-1.6.1.jar e
+ xtern/commons-collections-3.2.1.jar extern/openejb-4.5.2/openejb-java
+ agent-4.5.2.jar extern/openejb-4.5.2/joda-time-1.6.2.jar extern/opene
+ jb-4.5.2/opensaml-2.5.1-1.jar extern/openejb-4.5.2/serializer-2.7.1.j
+ ar extern/openejb-4.5.2/slf4j-api-1.7.5.jar extern/openejb-4.5.2/open
+ webbeans-impl-1.1.8.jar extern/openejb-4.5.2/neethi-3.0.1.jar extern/
+ openejb-4.5.2/openejb-ejbd-4.5.2.jar extern/openejb-4.5.2/openejb-cxf
+ -transport-4.5.2.jar extern/openejb-4.5.2/openejb-multicast-4.5.2.jar
+  extern/openejb-4.5.2/openwebbeans-web-1.1.8.jar extern/openejb-4.5.2
+ /saaj-impl-1.3.18.jar extern/openejb-4.5.2/xercesImpl-2.9.1.jar exter
+ n/openejb-4.5.2/cxf-rt-ws-policy-2.6.4.jar extern/openejb-4.5.2/geron
+ imo-transaction-3.1.1.jar extern/openejb-4.5.2/woodstox-core-asl-4.0.
+ 8.jar extern/openejb-4.5.2/javaee-api-6.0-5.jar extern/openejb-4.5.2/
+ quartz-2.1.6.jar extern/openejb-4.5.2/openwebbeans-spi-1.1.8.jar exte
+ rn/openejb-4.5.2/xalan-2.7.1.jar extern/openejb-4.5.2/commons-lang-2.
+ 6.jar extern/openejb-4.5.2/xmlschema-core-2.0.3.jar extern/openejb-4.
+ 5.2/activemq-ra-5.7.0.jar extern/openejb-4.5.2/openwebbeans-ejb-1.1.8
+ .jar extern/openejb-4.5.2/commons-dbcp-1.4.jar extern/openejb-4.5.2/c
+ xf-rt-frontend-jaxws-2.6.4.jar extern/openejb-4.5.2/cxf-rt-core-2.6.4
+ .jar extern/openejb-4.5.2/xml-resolver-1.2.jar extern/openejb-4.5.2/o
+ penejb-cxf-4.5.2.jar extern/openejb-4.5.2/xbean-bundleutils-3.12.jar 
+ extern/openejb-4.5.2/openejb-jpa-integration-4.5.2.jar extern/openejb
+ -4.5.2/howl-1.0.1-1.jar extern/openejb-4.5.2/mimepull-1.7.jar extern/
+ openejb-4.5.2/geronimo-connector-3.1.1.jar extern/openejb-4.5.2/openj
+ pa-asm-shaded-2.2.0.jar extern/openejb-4.5.2/cxf-rt-ws-addr-2.6.4.jar
+  extern/openejb-4.5.2/swizzle-stream-1.6.1.jar extern/openejb-4.5.2/w
+ sdl4j-1.6.2.jar extern/openejb-4.5.2/mbean-annotation-api-4.5.2.jar e
+ xtern/openejb-4.5.2/jansi-1.8.jar extern/openejb-4.5.2/openejb-jee-4.
+ 5.2.jar extern/openejb-4.5.2/openejb-daemon-4.5.2.jar extern/openejb-
+ 4.5.2/cxf-rt-frontend-simple-2.6.4.jar extern/openejb-4.5.2/commons-l
+ ogging-1.1.1.jar extern/openejb-4.5.2/xmlsec-1.5.3.jar extern/openejb
+ -4.5.2/openwebbeans-ee-common-1.1.8.jar extern/openejb-4.5.2/stax2-ap
+ i-3.0.2.jar extern/openejb-4.5.2/cxf-rt-transports-http-2.6.4.jar ext
+ ern/openejb-4.5.2/openejb-client-4.5.2.jar extern/openejb-4.5.2/hsqld
+ b-2.2.8.jar extern/openejb-4.5.2/openejb-api-4.5.2.jar extern/openejb
+ -4.5.2/commons-net-3.2.jar extern/openejb-4.5.2/cxf-api-2.6.4.jar ext
+ ern/openejb-4.5.2/commons-beanutils-core-1.8.3.jar extern/openejb-4.5
+ .2/wss4j-1.6.8.jar extern/openejb-4.5.2/openejb-server-4.5.2.jar exte
+ rn/openejb-4.5.2/kahadb-5.7.0.jar extern/openejb-4.5.2/xbean-naming-3
+ .12.jar extern/openejb-4.5.2/geronimo-javamail_1.4_mail-1.8.2.jar ext
+ ern/openejb-4.5.2/serp-1.13.1.jar extern/openejb-4.5.2/openws-1.4.2-1
+ .jar extern/openejb-4.5.2/openwebbeans-ee-1.1.8.jar extern/openejb-4.
+ 5.2/jaxb-impl-2.2.6.jar extern/openejb-4.5.2/commons-cli-1.2.jar exte
+ rn/openejb-4.5.2/bval-jsr303-0.5.jar extern/openejb-4.5.2/openejb-web
+ services-4.5.2.jar extern/openejb-4.5.2/activemq-protobuf-1.1.jar ext
+ ern/openejb-4.5.2/bval-core-0.5.jar extern/openejb-4.5.2/xbean-reflec
+ t-3.12.jar extern/openejb-4.5.2/cxf-rt-databinding-jaxb-2.6.4.jar ext
+ ern/openejb-4.5.2/cxf-rt-bindings-soap-2.6.4.jar extern/openejb-4.5.2
+ /activemq-core-5.7.0.jar extern/openejb-4.5.2/openejb-core-4.5.2.jar 
+ extern/openejb-4.5.2/commons-pool-1.5.7.jar extern/openejb-4.5.2/xbea
+ n-asm-shaded-3.12.jar extern/openejb-4.5.2/openejb-hsql-4.5.2.jar ext
+ ern/openejb-4.5.2/openejb-http-4.5.2.jar extern/openejb-4.5.2/xmltool
+ ing-1.3.2-1.jar extern/openejb-4.5.2/cxf-rt-bindings-xml-2.6.4.jar ex
+ tern/openejb-4.5.2/xbean-finder-shaded-3.12.jar extern/openejb-4.5.2/
+ javassist-3.17.1-GA.jar extern/openejb-4.5.2/slf4j-log4j12-1.7.5.jar 
+ extern/openejb-4.5.2/openejb-loader-4.5.2.jar extern/openejb-4.5.2/cx
+ f-rt-ws-security-2.6.4.jar extern/openejb-4.5.2/commons-lang3-3.1.jar
+  extern/openejb-4.5.2/geronimo-j2ee-connector_1.6_spec-1.0.jar extern
+ /openejb-4.5.2/commons-collections-3.2.1.jar
+Main-Class: cap.CaptchalizeMain
+

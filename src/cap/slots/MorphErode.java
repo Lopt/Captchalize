@@ -19,7 +19,7 @@ public class MorphErode extends SlotFunction<CompoundImage, CompoundImage> imple
 
     @Override
     public ResultPart<CompoundImage> execute(CompoundImage image) throws ProcessException {
-        //cap.db.jpa.slots.MorphErode data = this.getModel().getFunctionData();
+        //cap.db.jpa.slots.MorphErode data = this.getData();
 
         return new ResultPart<CompoundImage>(Morph.erode(image));
     }

@@ -18,7 +18,7 @@ public class OCRIsAlphabetic extends SlotFunction<String, String> implements ISl
 
     @Override
     public ResultPart<String> execute(String text) throws ProcessException {
-        //cap.db.jpa.slots.MorphErode data = this.getModel().getFunctionData();
+        //cap.db.jpa.slots.MorphErode data = this.getData();
 
         return new ResultPart<String>(OCR.isAlphabetic(text));
     }

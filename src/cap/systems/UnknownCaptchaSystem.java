@@ -15,6 +15,7 @@ import cap.img.CaptchaImage;
 import cap.img.CompoundImage;
 import cap.slots.BlurGaussian;
 import cap.slots.ConvertToCompoundImage;
+import cap.slots.MorphDilate;
 import cap.slots.OCRTesseract;
 
 /**
@@ -106,7 +107,7 @@ public class UnknownCaptchaSystem implements ICaptchaSystem {
 
     @Override
     public FunctionPipeline getFunctionPipeline(final CaptchaSample sample) throws ProcessException {
-        return new FunctionPipeline("Unknown_Default");
+        return new FunctionPipeline("unknown default");
     }
 
     @Override
@@ -114,13 +115,12 @@ public class UnknownCaptchaSystem implements ICaptchaSystem {
         FunctionPipeline defaultPipeline = null;
 
         try {
-            defaultPipeline = new FunctionPipeline("Unknown_Default", true);
+            defaultPipeline = new FunctionPipeline("unknown default", true);
 
-            ISlotFunction<CaptchaImage, CompoundImage> getCompound = new ConvertToCompoundImage();
-            getCompound.getModel().setName("Blubb");
-
-            defaultPipeline.register("getCompound", getCompound);
-            defaultPipeline.register("OCR", new OCRTesseract());
+            defaultPipeline.register("compound", new ConvertToCompoundImage());
+            defaultPipeline.register("blur", new BlurGaussian());
+            defaultPipeline.register("morph", new MorphDilate());
+            defaultPipeline.register("ocr", new OCRTesseract());
 
         } catch (ProcessException exception) {
             if (RunArguments.getInstance().isDebugMode()) {

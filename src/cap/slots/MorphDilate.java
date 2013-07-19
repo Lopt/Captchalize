@@ -19,7 +19,7 @@ public class MorphDilate extends SlotFunction<CompoundImage, CompoundImage> impl
 
     @Override
     public ResultPart<CompoundImage> execute(CompoundImage image) throws ProcessException {
-        //cap.db.jpa.slots.MorphDilate data = this.getModel().getFunctionData();
+        //cap.db.jpa.slots.MorphDilate data = this.getData();
 
         return new ResultPart<CompoundImage>(Morph.dilate(image));
     }

@@ -1,6 +1,7 @@
 package cap.db;
 
 import java.sql.Statement;
+import java.util.Properties;
 
 /**
  * Authors: Bernd Schmidt, Robert Könitz
@@ -20,4 +21,6 @@ public interface IDataBaseProxy {
 
     public boolean connect(String username, String password) throws DriverNotFoundException;
     public boolean disconnect();
+
+    public Properties getHibernateConfig();
 }

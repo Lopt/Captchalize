@@ -1,5 +1,6 @@
 package cap.db.jpa;
 
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,7 +22,7 @@ public class ServerOrder implements ICaptchalizeEntity {
     private int progressComplete = 0;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "serverOrder")
-    private Set<CaptchaSample> captchaSamples;
+    private Set<CaptchaSample> captchaSamples = new HashSet<CaptchaSample>();
 
     public ServerOrder() {}
 

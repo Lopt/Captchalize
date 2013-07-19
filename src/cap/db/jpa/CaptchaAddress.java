@@ -3,6 +3,7 @@ package cap.db.jpa;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -38,7 +39,7 @@ public class CaptchaAddress implements ICaptchalizeEntity {
     private Date date = null;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "captchaAddress")
-    private Set<CaptchaSample> captchaSamples;
+    private Set<CaptchaSample> captchaSamples = new HashSet<CaptchaSample>();
 
     public CaptchaAddress() {}
 

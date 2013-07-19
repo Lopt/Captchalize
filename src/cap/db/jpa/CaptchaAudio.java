@@ -1,5 +1,6 @@
 package cap.db.jpa;
 
+import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -21,7 +22,7 @@ public class CaptchaAudio implements ICaptchalizeEntity {
     // Abtastrate etc...
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "captchaAudio")
-    private Set<CaptchaSample> captchaSamples;
+    private Set<CaptchaSample> captchaSamples = new HashSet<CaptchaSample>();
 
     @Lob
     private byte[] sourceAudio = null;

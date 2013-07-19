@@ -1,5 +1,6 @@
 package cap;
 
+import cap.db.jpa.ISlotFunctionData;
 import cap.db.jpa.Managers;
 import cap.db.jpa.Slot;
 import cap.db.jpa.SlotNotFoundException;
@@ -10,8 +11,16 @@ import cap.db.jpa.SlotNotFoundException;
 public abstract class SlotFunction<Input, Output> implements ISlotFunction<Input, Output> {
     private Slot model = null;
 
+    @Override
     public Slot getModel() {
         return this.model;
+    }
+
+    @Override
+    public <T extends ISlotFunctionData> T getData() {
+        assert this.model != null : String.format("You have to register the SlotFunction %s first.", this.getClassName());
+
+        return this.model.getFunctionData();
     }
 
     @Override

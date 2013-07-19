@@ -19,7 +19,7 @@ public class OCRIsNumeric extends SlotFunction<String, String> implements ISlotF
 
     @Override
     public ResultPart<String> execute(String text) throws ProcessException {
-        //cap.db.jpa.slots.MorphErode data = this.getModel().getFunctionData();
+        //cap.db.jpa.slots.MorphErode data = this.getData();
 
         return new ResultPart<String>(OCR.isNumeric(text));
     }

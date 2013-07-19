@@ -1,7 +1,10 @@
 package cap.db.jpa;
 
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -25,8 +28,8 @@ public class FunctionPipeline implements ICaptchalizeEntity{
 
     private String name = "";
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "functionPipeline")
-    private Set<Slot> slots;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "functionPipeline")
+    private Set<Slot> slots = new HashSet<Slot>();
 
     @ManyToMany
     @JoinTable(
@@ -48,8 +51,11 @@ public class FunctionPipeline implements ICaptchalizeEntity{
         this.name = name;
     }
 
-    public Set<Slot> getSlots() {
-        return this.slots;
+    public List<Slot> getSlots() {
+        List<Slot> sortedSlots = new LinkedList<Slot>(this.slots);
+        Collections.sort(sortedSlots);
+
+        return sortedSlots;
     }
 
     public void setSlots(final Set<Slot> slots) {
