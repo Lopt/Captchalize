@@ -3,21 +3,30 @@ package cap.http;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
+import javax.persistence.EntityTransaction;
 
-import cap.RunArguments;
-import cap.db.jpa.CaptchaImage;
+import cap.db.jpa.Managers;
+import ij.ImagePlus;
+
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import ij.ImagePlus;
+
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.RequestContext;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.util.Streams;
+
+import cap.CaptchaSample;
+import cap.CaptchalizeRunner;
+import cap.RunArguments;
+import cap.img.CaptchaImage;
 
 /**
  * Authors: Bernd Schmidt, Robert Könitz
@@ -39,6 +48,10 @@ public class ImageUploadHandler implements HttpHandler {
         }
 
         RunArguments args = RunArguments.getInstance();
+        CaptchalizeRunner runner = CaptchalizeRunner.getInstance();
+        Map<String, String> data = new HashMap<String, String>();
+
+        EntityTransaction action = Managers.captchaSampleManager.getEntityManager().getTransaction();
 
         ServletFileUpload upload = new ServletFileUpload();
         upload.setFileSizeMax(args.getMaxImageSize());
@@ -61,15 +74,20 @@ public class ImageUploadHandler implements HttpHandler {
                         System.out.println("File field " + name + " with file name " + item.getName() + " detected.");
                     }
 
-                    //Managers.captchaSampleManager.create();
-                    //ImagePlus image = new ImagePlus("Test", ImageIO.read(stream));
+                    action.begin();
+                    CaptchaImage image = new CaptchaImage(new ImagePlus("Unnamed", ImageIO.read(stream)));
+                    CaptchaSample sample = new CaptchaSample(image);
+                    action.commit();
 
-                    //this.server.addCaptchaSample(); TODO
+                    runner.addCaptchaSample(sample);
+                    data.put("id", sample.getModel().getServerOrder().toString());
                 }
             }
         } catch(FileUploadException exception) {
             exception.printStackTrace();
         }
+
+        TemplateLoader.getInstance().response(httpExchange, "uploaded.html", data);
     }
 
     private class HttpExchangeRequestContext implements RequestContext {

@@ -1,3 +1,4 @@
+
 body {
     width: 100%;
     height: 100%;
@@ -6,7 +7,7 @@ body {
 }
 
 .box_container {
-    max-width: 60%;
+    max-width: 640px;
     text-align: center;
     
     margin: auto;
@@ -32,6 +33,19 @@ body {
     font-size: 1.2em;
     
     text-decoration: underline;
+}
+
+.box ul {
+    -ms-column-count: 3;
+    -o-column-count: 3;
+    -moz-column-count: 3;
+    -khtml-column-count: 3;
+    column-count: 3;
+}
+
+.box li {
+    text-align: left;
+    font-size: 12px;
 }
 
 .box form {

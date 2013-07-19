@@ -26,7 +26,9 @@ public class CaptchalizeHttpServer {
         }
 
         server.createContext("/", new FormHandler());
+        server.createContext("/style.css", new LayoutHandler());
         server.createContext("/imageinput", new ImageUploadHandler());
+        server.createContext("/result", new ShowResultHandler());
 
         return server;
     }

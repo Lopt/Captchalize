@@ -52,6 +52,8 @@ public class CaptchalizeMain {
 
         RunArguments args = RunArguments.getInstance();
         args.setCaptchaSystem("PHPBB");
+        args.setServerMode(true);
+        args.setServerPort(8080);
         args.setImages(new String[] { "testdata/examples/phpbb_0.png" });
 
         IDataBaseProxy proxy = args.getDatabaseProxy();
