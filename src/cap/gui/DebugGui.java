@@ -4,7 +4,7 @@ import cap.ResultPart;
 
 import java.awt.BorderLayout;
 import java.awt.HeadlessException;
-import java.util.Collection;
+import java.util.LinkedList;
 
 import javax.swing.JFrame;
 
@@ -26,7 +26,7 @@ public class DebugGui extends JFrame {
         this.init();
     }
 
-    public void setResultData(final Collection<ResultPart> parts) {
+    public void setResultData(final LinkedList<ResultPart> parts) {
         this.loader.setResultData(parts);
 
         this.pack();

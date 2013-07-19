@@ -30,6 +30,7 @@ public class ResultLoaderPanel extends JPanel implements ActionListener {
     private ResultPanel<CaptchaAudio> resultPanelAudio = null; // not used
     private ResultPanel<CompoundImage> resultPanelCompoundImage = null;
     private ResultPanel<CaptchaImage> resultPanelImage = null;
+    private ResultPanel<String> resultPanelString = null;
     private ResultPanel currentPanel = null;
 
     private CardLayout cardLayout = new CardLayout();
@@ -42,12 +43,13 @@ public class ResultLoaderPanel extends JPanel implements ActionListener {
         this.init();
     }
 
-    public void setResultData(final Collection<ResultPart> parts) {
+    public void setResultData(final LinkedList<ResultPart> parts) {
         assert parts != null;
 
-        this.results = (LinkedList<ResultPart>)parts;
+        this.results = parts;
         this.current = new StepIterator(this.results.listIterator());
         this.setResultData(this.current.next());
+        this.prevButton.setEnabled(false);
     }
 
     public void setResultData(final ResultPart part) {
@@ -76,6 +78,8 @@ public class ResultLoaderPanel extends JPanel implements ActionListener {
             this.currentPanel = this.resultPanelCompoundImage;
         } else if (name.equals("cap.img.CaptchaImage")) {
             this.currentPanel = this.resultPanelImage;
+        } else if (name.equals("String")) {
+            this.currentPanel = this.resultPanelString;
         }
 
         this.setNextButtonState();
@@ -120,17 +124,21 @@ public class ResultLoaderPanel extends JPanel implements ActionListener {
         this.prevButton = new JButton("<");
         this.prevButton.setActionCommand("prev");
         this.prevButton.addActionListener(this);
+        this.prevButton.setEnabled(false);
 
         this.nextButton = new JButton(">");
         this.nextButton.setActionCommand("next");
         this.nextButton.addActionListener(this);
+        this.nextButton.setEnabled(false);
 
         this.resultPanelCompoundImage = new ResultPanelCompoundImage();
         this.resultPanelImage = new ResultPanelImage();
+        this.resultPanelString = new ResultPanelString();
 
         this.content.setLayout(this.cardLayout);
         this.content.add(this.resultPanelCompoundImage, "cap.img.CompoundImage");
         this.content.add(this.resultPanelImage, "cap.img.CaptchaImage");
+        this.content.add(this.resultPanelString, "String");
         //content.add(this.resultPanelAudio, "Audio");
         //content.add(this.resultPanelText, "Text");
 
